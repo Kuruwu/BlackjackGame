@@ -1,9 +1,8 @@
 
 Welcome to Blackjack 2: Electric Boogaloo!
 
-===TERMS OF USE===
-This program is licensed under fair use. Re-use and modificiation is allowed so long as the proper parties are credited for the original program (MiaNSlater, Kuruwu, ..., ...). 
-Use of this program without the proper credit, such as presenting it as your own or using it for any school/university project, is strictly forbidden and will be countered.
-
 ==PROGRAM==
-This program is a Blackjack game simulated using Casino Rules. Users can make bets, split and ask for insurance on their bets.
+This program is a University project for a BlackJack game created by MiaNSlater, Kuruwu, Windows03JW and MegaManiaZ. The game follows casino rules and implements strategies such as insurance and splitting.
+
+==TERMS OF USE==
+Using this program for reference or in-general playing is allowed, however ripping the source code and claiming it as your own for your own project is forbidden and will be countered by college or university policies.
