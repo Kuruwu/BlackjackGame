@@ -11,6 +11,7 @@ namespace BlackjackGame
         {
             Deck deck = new Deck();
             deck.createDeck();
+            deck.ShuffleDeck();
  
         }
     }

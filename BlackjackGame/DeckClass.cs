@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,32 @@ namespace BlackjackGame
                 }
             }
         }
-      
+        /// <summary>
+        /// Shuffles the current deck. 
+        /// </summary>
+        public void ShuffleDeck()
+        {
+            Random random = new Random();
+            for (int i = listOfCards.Count() - 1; i > 0; i--)
+            {
+                int j = random.Next(0, 52);
+                Card temp = listOfCards[i];
+                listOfCards[i] = listOfCards[j];
+                listOfCards[j] = temp;
+            }
+            //Yates Shuffle
+        } 
+        /// <summary>
+        /// Draws a card from the top of the deck and removes it.
+        /// </summary>
+        /// <returns>Returns a Card Object</returns>
+        public Card DrawCard()
+        {
+            Card playerCard;
+            playerCard = listOfCards[0];
+            listOfCards.Remove(playerCard);
+            return playerCard;
+        }
+
     }
 }
