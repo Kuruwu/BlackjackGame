@@ -11,10 +11,16 @@ namespace BlackjackGame
     {
         List<Card> listOfCards = new List<Card>();
 
+        public Deck()
+        {
+            createDeck(); //creates a deck of 52 cards on object instantiation
+        }
+
         public List<Card> ListOfCards
         {
             get { return listOfCards; }
         }
+        
         public void createDeck()
         {
             foreach (string suits in Card.validSuits())
@@ -47,10 +53,14 @@ namespace BlackjackGame
         /// <returns>Returns a Card Object</returns>
         public Card DrawCard()
         {
-            Card playerCard;
-            playerCard = listOfCards[0];
-            listOfCards.Remove(playerCard);
-            return playerCard;
+            if (listOfCards != null && listOfCards.Count > 0) //Null checking
+            {
+                Card playerCard;
+                playerCard = listOfCards[0];
+                listOfCards.Remove(playerCard);
+                return playerCard;
+            }
+            throw new Exception("The deck of cards is null or empty");
         }
 
     }
