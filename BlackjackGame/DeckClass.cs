@@ -21,7 +21,7 @@ namespace BlackjackGame
             get { return listOfCards; }
         }
         
-        public void createDeck()
+        private void createDeck()
         {
             foreach (string suits in Card.validSuits())
             {

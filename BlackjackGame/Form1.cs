@@ -11,6 +11,8 @@ namespace BlackjackGame
         {
             Deck deck = new Deck();
             deck.ShuffleDeck();
+            Card playerCardOne = deck.DrawCard();
+            Card playerCardTwo = deck.DrawCard();
  
         }
     }
