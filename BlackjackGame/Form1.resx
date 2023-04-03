@@ -57,4 +57,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>1. Start the game by allocating your bet.
+2. To win the game, you must reach 21 or the closest value to 21.
+3. You can either Hit, which draws another card and adds to your total value, or Stand, which passes your turn.
+4. If the Dealer reaches 21 or draws a closer value than you, the Dealer wins and your betted money is lost.
+5. If both of you manage to draw the same value, a Draw occurs and your betted money is returned.
+6. If your opening hand contains two cards of the same value, you can Split, which doubles your initial bet and redraws your hand
+while keeping your previous draw.
+7. If the Dealer holds an ace, you can place an Insurance bet, which is half your current bet that you've placed. If you lose to the
+Dealer, your Insurance bet is retrieved and cashed out to you.</value>
+  </data>
 </root>
