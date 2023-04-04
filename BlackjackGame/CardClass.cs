@@ -7,7 +7,7 @@ namespace BlackjackGame
 		string rank;
 		string suit;
 		bool faceup;
-		Image image;
+		Image imageFront;
 		int value;
 		private static Dictionary<string, int> cardValues = new Dictionary<string, int>();
         public string Rank
@@ -24,7 +24,7 @@ namespace BlackjackGame
 		}
 		public Image Image 
 		{
-			get { return image; }
+			get { return imageFront; }
 		}
 		public int Value
 		{
@@ -59,15 +59,15 @@ namespace BlackjackGame
 			rank = cardRank;
 			suit = cardSuit;
 			faceup = cardFaceup;
-            //image = Image.FromFile();
             value = cardValues[rank];
-        }
-		/// <summary>
-		/// A method to flip a boolean
-		/// </summary>
-		/// <param name="cardflip"></param>
-		/// <returns></returns>
-		public bool flipCard(bool cardflip)
+			imageFront = getCardImage();
+		}
+        /// <summary>
+        /// A method to flip a boolean
+        /// </summary>
+        /// <param name="cardflip"></param>
+        /// <returns></returns>
+        public bool flipCard(bool cardflip)
 		{
 			return cardflip = !cardflip;
 		}
@@ -89,6 +89,15 @@ namespace BlackjackGame
 			string[] validSuits = { "Hearts", "Clubs", "Spades", "Diamonds" };
 			return validSuits;
 		}
-
+		/// <summary>
+		/// Assigns each card an image once it's instantiated based on rank and suit"
+		/// </summary>
+		/// <returns>Image if exists else null</returns>
+		private Image getCardImage()
+		{
+			string resourceName = (suit.ToLower() + "_" + rank.ToLower());
+			// Gets the resource based on filename.
+			return (Image)CardImageResources.ResourceManager.GetObject(resourceName); 
+        }
 	}
 }
