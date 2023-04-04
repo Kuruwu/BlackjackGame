@@ -33,7 +33,7 @@ namespace BlackjackGame
             }
         }
         /// <summary>
-        /// Shuffles the current deck. 
+        /// Shuffles the current deck using Yates Shuffle. 
         /// </summary>
         public void ShuffleDeck()
         {
@@ -45,8 +45,8 @@ namespace BlackjackGame
                 listOfCards[i] = listOfCards[j];
                 listOfCards[j] = temp;
             }
-            //Yates Shuffle
         } 
+
         /// <summary>
         /// Draws a card from the top of the deck and removes it.
         /// </summary>
@@ -62,6 +62,13 @@ namespace BlackjackGame
             }
             throw new Exception("The deck of cards is null or empty");
         }
-
+        /// <summary>
+        /// Removes existing deck and creates a new ordered 52 card deck.
+        /// </summary>
+        public void ResetDeck()
+        {
+            listOfCards.Clear();
+            createDeck();
+        }
     }
 }

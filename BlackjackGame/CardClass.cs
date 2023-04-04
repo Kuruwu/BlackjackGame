@@ -83,10 +83,10 @@ namespace BlackjackGame
 		/// <summary>
 		/// A method that returns valid suits
 		/// </summary>
-		/// <returns>An Array of ranks in string format</returns>
+		/// <returns>An Array of suits in string format</returns>
 		public static string[] validSuits()
 		{
-			string[] validSuits = { "Heart", "Club", "Spade", "Diamond" };
+			string[] validSuits = { "Hearts", "Clubs", "Spades", "Diamonds" };
 			return validSuits;
 		}
 
