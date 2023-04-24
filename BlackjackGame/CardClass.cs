@@ -63,13 +63,11 @@ namespace BlackjackGame
 			imageFront = getCardImage();
 		}
         /// <summary>
-        /// A method to flip a boolean
+        /// Flip this card objects faceUp value
         /// </summary>
-        /// <param name="cardflip"></param>
-        /// <returns></returns>
-        public bool flipCard(bool cardflip)
+        public void flipCard()
 		{
-			return cardflip = !cardflip;
+			this.faceup = !this.faceup;
 		}
 		/// <summary>
 		/// A method that returns valid ranks.
