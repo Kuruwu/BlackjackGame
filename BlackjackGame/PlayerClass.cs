@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace BlackjackGame
 {
-    internal class Class1
+    public class PlayerClass : Money
     {
+        Money playerMoney = new Money();
+        public void playerSetup()
+        {
+            playerMoney.setMoney();
+            playerMoney.playerBet();
+            Deck deck = new Deck();
+            deck.ShuffleDeck();
+            Card playerCardOne = deck.DrawCard();
+            Card playerCardTwo = deck.DrawCard();
+        }
     }
 }
