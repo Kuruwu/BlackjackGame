@@ -29,199 +29,252 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.blackjackTab = new System.Windows.Forms.TabControl();
-            this.gameTab = new System.Windows.Forms.TabPage();
-            this.BetTitle = new System.Windows.Forms.TextBox();
-            this.SplitButton = new System.Windows.Forms.Button();
-            this.DoubleButton = new System.Windows.Forms.Button();
-            this.StandButton = new System.Windows.Forms.Button();
-            this.HitButton = new System.Windows.Forms.Button();
-            this.BlackjackTitle = new System.Windows.Forms.Label();
-            this.rulesTab = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.rulesLabel = new System.Windows.Forms.Label();
-            this.BetAmount = new System.Windows.Forms.Label();
-            this.RulesButton = new System.Windows.Forms.Button();
-            this.blackjackTab.SuspendLayout();
-            this.gameTab.SuspendLayout();
-            this.rulesTab.SuspendLayout();
-            this.SuspendLayout();
+            blackjackTab = new TabControl();
+            gameTab = new TabPage();
+            RulesButton = new Button();
+            BetAmount = new Label();
+            BetTitle = new TextBox();
+            SplitButton = new Button();
+            DoubleButton = new Button();
+            StandButton = new Button();
+            HitButton = new Button();
+            BlackjackTitle = new Label();
+            rulesTab = new TabPage();
+            label1 = new Label();
+            rulesLabel = new Label();
+            playerCurrentBet = new Label();
+            reduceBet = new Button();
+            increaseBet = new Button();
+            blackjackTab.SuspendLayout();
+            gameTab.SuspendLayout();
+            rulesTab.SuspendLayout();
+            SuspendLayout();
             // 
             // blackjackTab
             // 
-            this.blackjackTab.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.blackjackTab.Controls.Add(this.gameTab);
-            this.blackjackTab.Controls.Add(this.rulesTab);
-            this.blackjackTab.Location = new System.Drawing.Point(0, -1);
-            this.blackjackTab.Margin = new System.Windows.Forms.Padding(2);
-            this.blackjackTab.Name = "blackjackTab";
-            this.blackjackTab.SelectedIndex = 0;
-            this.blackjackTab.Size = new System.Drawing.Size(799, 452);
-            this.blackjackTab.TabIndex = 0;
+            blackjackTab.Appearance = TabAppearance.Buttons;
+            blackjackTab.Controls.Add(gameTab);
+            blackjackTab.Controls.Add(rulesTab);
+            blackjackTab.Location = new Point(0, -1);
+            blackjackTab.Margin = new Padding(2, 3, 2, 3);
+            blackjackTab.Name = "blackjackTab";
+            blackjackTab.SelectedIndex = 0;
+            blackjackTab.Size = new Size(913, 603);
+            blackjackTab.TabIndex = 0;
             // 
             // gameTab
             // 
-            this.gameTab.BackColor = System.Drawing.Color.ForestGreen;
-            this.gameTab.Controls.Add(this.RulesButton);
-            this.gameTab.Controls.Add(this.BetAmount);
-            this.gameTab.Controls.Add(this.BetTitle);
-            this.gameTab.Controls.Add(this.SplitButton);
-            this.gameTab.Controls.Add(this.DoubleButton);
-            this.gameTab.Controls.Add(this.StandButton);
-            this.gameTab.Controls.Add(this.HitButton);
-            this.gameTab.Controls.Add(this.BlackjackTitle);
-            this.gameTab.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gameTab.Location = new System.Drawing.Point(4, 27);
-            this.gameTab.Margin = new System.Windows.Forms.Padding(2);
-            this.gameTab.Name = "gameTab";
-            this.gameTab.Padding = new System.Windows.Forms.Padding(2);
-            this.gameTab.Size = new System.Drawing.Size(791, 421);
-            this.gameTab.TabIndex = 0;
-            this.gameTab.Text = "Game";
-            // 
-            // BetTitle
-            // 
-            this.BetTitle.BackColor = System.Drawing.Color.ForestGreen;
-            this.BetTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BetTitle.Font = new System.Drawing.Font("Stencil", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BetTitle.ForeColor = System.Drawing.SystemColors.Window;
-            this.BetTitle.Location = new System.Drawing.Point(608, 5);
-            this.BetTitle.Name = "BetTitle";
-            this.BetTitle.Size = new System.Drawing.Size(159, 25);
-            this.BetTitle.TabIndex = 6;
-            this.BetTitle.Text = "Current Bet:";
-            // 
-            // SplitButton
-            // 
-            this.SplitButton.BackColor = System.Drawing.Color.LimeGreen;
-            this.SplitButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.SplitButton.Location = new System.Drawing.Point(608, 296);
-            this.SplitButton.Name = "SplitButton";
-            this.SplitButton.Size = new System.Drawing.Size(159, 45);
-            this.SplitButton.TabIndex = 5;
-            this.SplitButton.Text = "Split";
-            this.SplitButton.UseVisualStyleBackColor = false;
-            // 
-            // DoubleButton
-            // 
-            this.DoubleButton.BackColor = System.Drawing.Color.LimeGreen;
-            this.DoubleButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.DoubleButton.Location = new System.Drawing.Point(608, 233);
-            this.DoubleButton.Name = "DoubleButton";
-            this.DoubleButton.Size = new System.Drawing.Size(159, 45);
-            this.DoubleButton.TabIndex = 4;
-            this.DoubleButton.Text = "Double";
-            this.DoubleButton.UseVisualStyleBackColor = false;
-            // 
-            // StandButton
-            // 
-            this.StandButton.BackColor = System.Drawing.Color.LimeGreen;
-            this.StandButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.StandButton.Location = new System.Drawing.Point(608, 169);
-            this.StandButton.Name = "StandButton";
-            this.StandButton.Size = new System.Drawing.Size(159, 45);
-            this.StandButton.TabIndex = 3;
-            this.StandButton.Text = "Stand";
-            this.StandButton.UseVisualStyleBackColor = false;
-            // 
-            // HitButton
-            // 
-            this.HitButton.BackColor = System.Drawing.Color.LimeGreen;
-            this.HitButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.HitButton.Location = new System.Drawing.Point(608, 104);
-            this.HitButton.Name = "HitButton";
-            this.HitButton.Size = new System.Drawing.Size(159, 45);
-            this.HitButton.TabIndex = 2;
-            this.HitButton.Text = "Hit";
-            this.HitButton.UseVisualStyleBackColor = false;
-            // 
-            // BlackjackTitle
-            // 
-            this.BlackjackTitle.AutoSize = true;
-            this.BlackjackTitle.Font = new System.Drawing.Font("Stencil", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BlackjackTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BlackjackTitle.Location = new System.Drawing.Point(262, 2);
-            this.BlackjackTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.BlackjackTitle.Name = "BlackjackTitle";
-            this.BlackjackTitle.Size = new System.Drawing.Size(228, 44);
-            this.BlackjackTitle.TabIndex = 1;
-            this.BlackjackTitle.Text = "BLACKJACK";
-            this.BlackjackTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // rulesTab
-            // 
-            this.rulesTab.BackColor = System.Drawing.Color.ForestGreen;
-            this.rulesTab.Controls.Add(this.label1);
-            this.rulesTab.Controls.Add(this.rulesLabel);
-            this.rulesTab.Location = new System.Drawing.Point(4, 27);
-            this.rulesTab.Margin = new System.Windows.Forms.Padding(2);
-            this.rulesTab.Name = "rulesTab";
-            this.rulesTab.Padding = new System.Windows.Forms.Padding(2);
-            this.rulesTab.Size = new System.Drawing.Size(791, 421);
-            this.rulesTab.TabIndex = 1;
-            this.rulesTab.Text = "Rules";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(10, 48);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(716, 135);
-            this.label1.TabIndex = 1;
-            this.label1.Text = resources.GetString("label1.Text");
-            // 
-            // rulesLabel
-            // 
-            this.rulesLabel.AutoSize = true;
-            this.rulesLabel.Font = new System.Drawing.Font("Stencil", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rulesLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.rulesLabel.Location = new System.Drawing.Point(342, 12);
-            this.rulesLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.rulesLabel.Name = "rulesLabel";
-            this.rulesLabel.Size = new System.Drawing.Size(96, 32);
-            this.rulesLabel.TabIndex = 0;
-            this.rulesLabel.Text = "RULES";
-            // 
-            // BetAmount
-            // 
-            this.BetAmount.AutoSize = true;
-            this.BetAmount.Font = new System.Drawing.Font("Stencil", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BetAmount.ForeColor = System.Drawing.SystemColors.Window;
-            this.BetAmount.Location = new System.Drawing.Point(608, 33);
-            this.BetAmount.Name = "BetAmount";
-            this.BetAmount.Size = new System.Drawing.Size(0, 22);
-            this.BetAmount.TabIndex = 7;
+            gameTab.BackColor = Color.ForestGreen;
+            gameTab.Controls.Add(increaseBet);
+            gameTab.Controls.Add(reduceBet);
+            gameTab.Controls.Add(playerCurrentBet);
+            gameTab.Controls.Add(RulesButton);
+            gameTab.Controls.Add(BetAmount);
+            gameTab.Controls.Add(BetTitle);
+            gameTab.Controls.Add(SplitButton);
+            gameTab.Controls.Add(DoubleButton);
+            gameTab.Controls.Add(StandButton);
+            gameTab.Controls.Add(HitButton);
+            gameTab.Controls.Add(BlackjackTitle);
+            gameTab.ForeColor = SystemColors.ActiveCaptionText;
+            gameTab.Location = new Point(4, 32);
+            gameTab.Margin = new Padding(2, 3, 2, 3);
+            gameTab.Name = "gameTab";
+            gameTab.Padding = new Padding(2, 3, 2, 3);
+            gameTab.Size = new Size(905, 567);
+            gameTab.TabIndex = 0;
+            gameTab.Text = "Game";
             // 
             // RulesButton
             // 
-            this.RulesButton.BackColor = System.Drawing.Color.LimeGreen;
-            this.RulesButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.RulesButton.Location = new System.Drawing.Point(5, 5);
-            this.RulesButton.Name = "RulesButton";
-            this.RulesButton.Size = new System.Drawing.Size(82, 25);
-            this.RulesButton.TabIndex = 8;
-            this.RulesButton.Text = "Rules";
-            this.RulesButton.UseVisualStyleBackColor = false;
+            RulesButton.BackColor = Color.LimeGreen;
+            RulesButton.ForeColor = SystemColors.ActiveCaptionText;
+            RulesButton.Location = new Point(6, 7);
+            RulesButton.Margin = new Padding(3, 4, 3, 4);
+            RulesButton.Name = "RulesButton";
+            RulesButton.Size = new Size(94, 33);
+            RulesButton.TabIndex = 8;
+            RulesButton.Text = "Rules";
+            RulesButton.UseVisualStyleBackColor = false;
+            // 
+            // BetAmount
+            // 
+            BetAmount.AutoSize = true;
+            BetAmount.Font = new Font("Stencil", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            BetAmount.ForeColor = SystemColors.Window;
+            BetAmount.Location = new Point(695, 44);
+            BetAmount.Name = "BetAmount";
+            BetAmount.Size = new Size(0, 29);
+            BetAmount.TabIndex = 7;
+            // 
+            // BetTitle
+            // 
+            BetTitle.BackColor = Color.ForestGreen;
+            BetTitle.BorderStyle = BorderStyle.None;
+            BetTitle.Font = new Font("Stencil", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            BetTitle.ForeColor = SystemColors.Window;
+            BetTitle.Location = new Point(695, 7);
+            BetTitle.Margin = new Padding(3, 4, 3, 4);
+            BetTitle.Name = "BetTitle";
+            BetTitle.Size = new Size(182, 32);
+            BetTitle.TabIndex = 6;
+            BetTitle.Text = "Current Bet:";
+            // 
+            // SplitButton
+            // 
+            SplitButton.BackColor = Color.LimeGreen;
+            SplitButton.ForeColor = SystemColors.ActiveCaptionText;
+            SplitButton.Location = new Point(695, 395);
+            SplitButton.Margin = new Padding(3, 4, 3, 4);
+            SplitButton.Name = "SplitButton";
+            SplitButton.Size = new Size(182, 60);
+            SplitButton.TabIndex = 5;
+            SplitButton.Text = "Split";
+            SplitButton.UseVisualStyleBackColor = false;
+            SplitButton.Click += SplitButton_Click;
+            // 
+            // DoubleButton
+            // 
+            DoubleButton.BackColor = Color.LimeGreen;
+            DoubleButton.ForeColor = SystemColors.ActiveCaptionText;
+            DoubleButton.Location = new Point(695, 311);
+            DoubleButton.Margin = new Padding(3, 4, 3, 4);
+            DoubleButton.Name = "DoubleButton";
+            DoubleButton.Size = new Size(182, 60);
+            DoubleButton.TabIndex = 4;
+            DoubleButton.Text = "Double";
+            DoubleButton.UseVisualStyleBackColor = false;
+            DoubleButton.Click += DoubleButton_Click;
+            // 
+            // StandButton
+            // 
+            StandButton.BackColor = Color.LimeGreen;
+            StandButton.ForeColor = SystemColors.ActiveCaptionText;
+            StandButton.Location = new Point(695, 225);
+            StandButton.Margin = new Padding(3, 4, 3, 4);
+            StandButton.Name = "StandButton";
+            StandButton.Size = new Size(182, 60);
+            StandButton.TabIndex = 3;
+            StandButton.Text = "Stand";
+            StandButton.UseVisualStyleBackColor = false;
+            StandButton.Click += StandButton_Click;
+            // 
+            // HitButton
+            // 
+            HitButton.BackColor = Color.LimeGreen;
+            HitButton.ForeColor = SystemColors.ActiveCaptionText;
+            HitButton.Location = new Point(695, 139);
+            HitButton.Margin = new Padding(3, 4, 3, 4);
+            HitButton.Name = "HitButton";
+            HitButton.Size = new Size(182, 60);
+            HitButton.TabIndex = 2;
+            HitButton.Text = "Hit";
+            HitButton.UseVisualStyleBackColor = false;
+            HitButton.Click += HitButton_Click;
+            // 
+            // BlackjackTitle
+            // 
+            BlackjackTitle.AutoSize = true;
+            BlackjackTitle.Font = new Font("Stencil", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            BlackjackTitle.ForeColor = SystemColors.ButtonHighlight;
+            BlackjackTitle.Location = new Point(299, 3);
+            BlackjackTitle.Margin = new Padding(2, 0, 2, 0);
+            BlackjackTitle.Name = "BlackjackTitle";
+            BlackjackTitle.Size = new Size(285, 56);
+            BlackjackTitle.TabIndex = 1;
+            BlackjackTitle.Text = "BLACKJACK";
+            BlackjackTitle.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // rulesTab
+            // 
+            rulesTab.BackColor = Color.ForestGreen;
+            rulesTab.Controls.Add(label1);
+            rulesTab.Controls.Add(rulesLabel);
+            rulesTab.Location = new Point(4, 32);
+            rulesTab.Margin = new Padding(2, 3, 2, 3);
+            rulesTab.Name = "rulesTab";
+            rulesTab.Padding = new Padding(2, 3, 2, 3);
+            rulesTab.Size = new Size(905, 567);
+            rulesTab.TabIndex = 1;
+            rulesTab.Text = "Rules";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(11, 64);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(912, 180);
+            label1.TabIndex = 1;
+            label1.Text = resources.GetString("label1.Text");
+            // 
+            // rulesLabel
+            // 
+            rulesLabel.AutoSize = true;
+            rulesLabel.Font = new Font("Stencil", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            rulesLabel.ForeColor = SystemColors.ButtonHighlight;
+            rulesLabel.Location = new Point(391, 16);
+            rulesLabel.Margin = new Padding(2, 0, 2, 0);
+            rulesLabel.Name = "rulesLabel";
+            rulesLabel.Size = new Size(121, 40);
+            rulesLabel.TabIndex = 0;
+            rulesLabel.Text = "RULES";
+            // 
+            // playerCurrentBet
+            // 
+            playerCurrentBet.AutoSize = true;
+            playerCurrentBet.Location = new Point(780, 57);
+            playerCurrentBet.Name = "playerCurrentBet";
+            playerCurrentBet.Size = new Size(17, 20);
+            playerCurrentBet.TabIndex = 9;
+            playerCurrentBet.Text = "0";
+            // 
+            // reduceBet
+            // 
+            reduceBet.BackColor = Color.LimeGreen;
+            reduceBet.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            reduceBet.Location = new Point(695, 53);
+            reduceBet.Name = "reduceBet";
+            reduceBet.Size = new Size(34, 29);
+            reduceBet.TabIndex = 10;
+            reduceBet.Text = "-";
+            reduceBet.UseVisualStyleBackColor = false;
+            reduceBet.Click += reduceBet_Click;
+            // 
+            // increaseBet
+            // 
+            increaseBet.BackColor = Color.LimeGreen;
+            increaseBet.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            increaseBet.Location = new Point(843, 53);
+            increaseBet.Name = "increaseBet";
+            increaseBet.Size = new Size(34, 29);
+            increaseBet.TabIndex = 11;
+            increaseBet.Text = "+";
+            increaseBet.UseVisualStyleBackColor = false;
+            increaseBet.Click += increaseBet_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.blackjackTab);
-            this.Name = "Form1";
-            this.Text = "Blackjack";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.blackjackTab.ResumeLayout(false);
-            this.gameTab.ResumeLayout(false);
-            this.gameTab.PerformLayout();
-            this.rulesTab.ResumeLayout(false);
-            this.rulesTab.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(914, 600);
+            Controls.Add(blackjackTab);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            Name = "Form1";
+            Text = "Blackjack";
+            Load += Form1_Load;
+            blackjackTab.ResumeLayout(false);
+            gameTab.ResumeLayout(false);
+            gameTab.PerformLayout();
+            rulesTab.ResumeLayout(false);
+            rulesTab.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -239,5 +292,8 @@
         private TextBox BetTitle;
         private Button RulesButton;
         private Label BetAmount;
+        private Button increaseBet;
+        private Button reduceBet;
+        private Label playerCurrentBet;
     }
 }

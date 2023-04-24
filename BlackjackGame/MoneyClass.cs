@@ -8,7 +8,7 @@ namespace BlackjackGame
 {
     public class Money
     {
-        int cashValue;
+        private static int cashValue;
         int playersBet;
         //Set the starting money
         public void setMoney()
@@ -16,29 +16,18 @@ namespace BlackjackGame
             cashValue = 1000;
         }
 
-        public void playerBet()
+        public void playerBet(int playerCashBet)
         {
-            int playerBet = //TextBox1.Text(); This will be changed when the betting system is implemented
+            int playerBet = playerCashBet;
             cashValue = cashValue - playersBet;
         }
 
-        public void winScenario()
+        public static int CashValueRetrieve
         {
-            if ((playerCardOne + playerCardTwo) > ((dealerCardOne + dealerCardTwo))
-            {
-                cashValue += playersBet + playersBet;
-                return;
-            }
-            else if ((playerCardOne + playerCardTwo)) < ((dealerCardOne + dealerCardTwo)) 
-            {
-                return;
-            }
-            else if ((playerCardOne + playerCardTwo)) == ((dealerCardOne + dealerCardTwo)) 
-            {
-                cashValue += playersBet;
-                return;
-            }
+            get { return cashValue; }
+            set { cashValue = value; }
         }
+        
         
     }
 }
