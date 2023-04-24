@@ -9,10 +9,8 @@ namespace BlackjackGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Deck deck = new Deck();
-            deck.ShuffleDeck();
-            Card playerCardOne = deck.DrawCard();
-            Card playerCardTwo = deck.DrawCard();
+            PlayerClass player1 = new PlayerClass();
+            player1.playerSetup();
  
         }
     }
