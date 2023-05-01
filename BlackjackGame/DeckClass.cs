@@ -27,7 +27,7 @@ namespace BlackjackGame
             {
                 foreach (string ranks in Card.validRanks())
                 {
-                    Card card = new Card(ranks, suits, false);
+                    Card card = new Card(ranks, suits);
                     listOfCards.Add(card);
                 }
             }
@@ -62,6 +62,7 @@ namespace BlackjackGame
             }
             throw new Exception("The deck of cards is null or empty");
         }
+
         /// <summary>
         /// Removes existing deck and creates a new ordered 52 card deck.
         /// </summary>

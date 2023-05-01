@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Security.Cryptography;
 
 namespace BlackjackGame
 {
 	public class Card
 	{
-		string rank;
+        string rank;
 		string suit;
 		bool faceup;
-		Image imageFront;
+		Image image;
 		int value;
 		private static Dictionary<string, int> cardValues = new Dictionary<string, int>();
         public string Rank
@@ -24,11 +25,12 @@ namespace BlackjackGame
 		}
 		public Image Image 
 		{
-			get { return imageFront; }
+			get { return image; }
 		}
 		public int Value
 		{
 			get { return value; }
+			set { this.value = value; }
 		}
 
 		static Card()
@@ -54,21 +56,36 @@ namespace BlackjackGame
 		/// <param name="cardRank"></param>
 		/// <param name="cardSuit"></param>
 		/// <param name="cardFaceup"></param>
-		public Card(string cardRank, string cardSuit, bool cardFaceup)
+		public Card(string cardRank, string cardSuit, bool cardFaceup = true)
 		{
 			rank = cardRank;
 			suit = cardSuit;
 			faceup = cardFaceup;
-            value = cardValues[rank];
-			imageFront = getCardImage();
+			value = cardValues[rank];
+            if (faceup == true)
+            {
+                image = getCardImage();
+            }
+            else
+            {
+                image = CardImageResources.red; //Fixme
+            };
 		}
         /// <summary>
-        /// Flip this card objects faceUp value
+        /// Flip this card objects faceUp value and sets its image. 
         /// </summary>
         public void flipCard()
 		{
 			this.faceup = !this.faceup;
-		}
+            if (faceup == true)
+            {
+                image = getCardImage();
+            }
+            else
+            {
+				image = CardImageResources.red; //Fixme
+            }
+        }
 		/// <summary>
 		/// A method that returns valid ranks.
 		/// </summary>
