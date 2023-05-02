@@ -10,7 +10,7 @@ namespace BlackjackGame
 {
     public class Player
     {
-        public static event EventHandler<EventArgs> CardHasAddedToHand; //Card Added to Hand Event
+        public event EventHandler<EventArgs> CardHasAddedToHand; //Card Added to Hand Event
         string playerName;
         int playerMoney;
         int playerBet;

@@ -33,14 +33,14 @@ namespace BlackjackGame
             }
         }
         /// <summary>
-        /// Shuffles the current deck using Yates Shuffle. 
+        /// Shuffles the current deck using Fisher - Yates Shuffle. 
         /// </summary>
         public void ShuffleDeck()
         {
             Random random = new Random();
-            for (int i = listOfCards.Count() - 1; i > 0; i--)
+            for (int i = 52 - 1; i > 0; i--)
             {
-                int j = random.Next(0, 52);
+                int j = random.Next(0, i + 1);
                 Card temp = listOfCards[i];
                 listOfCards[i] = listOfCards[j];
                 listOfCards[j] = temp;

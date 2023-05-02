@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             blackjackTab = new TabControl();
             gameTab = new TabPage();
+            btnInsurance = new Button();
             lblWinCondition = new Label();
             lblDealerTotal = new Label();
             btnBet = new Button();
@@ -93,6 +94,7 @@
             // gameTab
             // 
             gameTab.BackColor = Color.ForestGreen;
+            gameTab.Controls.Add(btnInsurance);
             gameTab.Controls.Add(lblWinCondition);
             gameTab.Controls.Add(lblDealerTotal);
             gameTab.Controls.Add(btnBet);
@@ -118,6 +120,20 @@
             gameTab.Size = new Size(791, 421);
             gameTab.TabIndex = 0;
             gameTab.Text = "Game";
+            // 
+            // btnInsurance
+            // 
+            btnInsurance.BackColor = Color.DeepSkyBlue;
+            btnInsurance.Enabled = false;
+            btnInsurance.ForeColor = SystemColors.ActiveCaptionText;
+            btnInsurance.Location = new Point(608, 356);
+            btnInsurance.Name = "btnInsurance";
+            btnInsurance.Size = new Size(159, 45);
+            btnInsurance.TabIndex = 29;
+            btnInsurance.Text = "Insurance";
+            btnInsurance.UseVisualStyleBackColor = false;
+            btnInsurance.Visible = false;
+            btnInsurance.Click += btnInsurance_Click;
             // 
             // lblWinCondition
             // 
@@ -260,6 +276,7 @@
             // StandButton
             // 
             StandButton.BackColor = Color.LimeGreen;
+            StandButton.Enabled = false;
             StandButton.ForeColor = SystemColors.ActiveCaptionText;
             StandButton.Location = new Point(608, 169);
             StandButton.Name = "StandButton";
@@ -272,6 +289,7 @@
             // HitButton
             // 
             HitButton.BackColor = Color.LimeGreen;
+            HitButton.Enabled = false;
             HitButton.ForeColor = SystemColors.ActiveCaptionText;
             HitButton.Location = new Point(608, 104);
             HitButton.Name = "HitButton";
@@ -513,5 +531,6 @@
         private Label lblWinCondition;
         private Panel panelPlayerCards;
         private Panel panelDealersCards;
+        private Button btnInsurance;
     }
 }

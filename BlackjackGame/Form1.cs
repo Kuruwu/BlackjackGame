@@ -17,14 +17,15 @@ namespace BlackjackGame
         public Form1()
         {
             InitializeComponent(); ;
-            Player.CardHasAddedToHand += CardHasBeenModified; //Subscribing to event 
+            playerOne.CardHasAddedToHand += CardHasBeenModified; //Subscribing to events.
+            dealer.CardHasAddedToHand += CardHasBeenModified; //Event could be static to Player class but causes memory leaks apparently. 
             HitButton.Visible = true;
-            dealerTimer.Interval = 2000; //2 seconds.
+            dealerTimer.Interval = 1000; //2 seconds.
             dealerTimer.Tick += new EventHandler(DealerCardTimer); //Every interval (Tick) this event is fired.
-            tableTimer.Interval = 3000; //3 seconds
+            tableTimer.Interval = 2000; //3 seconds
             tableTimer.Tick += new EventHandler(ClearTableTimer);
             lblWinCondition.Visible = false;
-            openingHandTimer.Interval = 1000; //1 second
+            openingHandTimer.Interval = 500; //0.5 seconds
             openingHandTimer.Tick += new EventHandler(OpeningHand);
         }
         /// <summary>
@@ -83,11 +84,16 @@ namespace BlackjackGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            HitButton.Enabled = false;
+            StandButton.Enabled = false;
+            DoubleButton.Enabled = false;
+            SplitButton.Enabled = false;
             deck.ShuffleDeck();
         }
 
         private void HitButton_Click(object sender, EventArgs e)
         {
+            HideInsuranceButton();
             playerOne.AddCardToHand(deck.DrawCard());
             int playerOneHandTotal = playerOne.CalculateHandValue();
             lblPlayerTotal.Text = playerOneHandTotal.ToString();
@@ -117,6 +123,7 @@ namespace BlackjackGame
 
         private void StandButton_Click(object sender, EventArgs e)
         {
+            HideInsuranceButton();
             dealerTimer.Start();
             if (dealer.CurrentHand.Count! > 1) //Inside Array bounds Check
             {
@@ -132,6 +139,7 @@ namespace BlackjackGame
         {
             playerOne.AddCardToHand(deck.DrawCard());
             HitButton.Enabled = false;
+            StandButton_Click((object)sender, e);
         }
 
         private void SplitButton_Click(object sender, EventArgs e)
@@ -190,6 +198,7 @@ namespace BlackjackGame
         private void btnBet_Click(object sender, EventArgs e)
         {
             btnBet.Enabled = false;
+            playerOne.Bet(playerBet); //Temp Bet
             HitButton.Enabled = true;
             StandButton.Enabled = true;
             openingHandTimer.Start();
@@ -217,7 +226,7 @@ namespace BlackjackGame
         /// </summary>
         private void CheckWinCondition()
         {
-            int playersHand = playerOne.CalculateHandValue(), dealersHand = dealer.CalculateHandValue(); 
+            int playersHand = playerOne.CalculateHandValue(), dealersHand = dealer.CalculateHandValue();
 
             if (dealersHand > 21 && playersHand < 22) //if dealer has bust
             {
@@ -296,7 +305,9 @@ namespace BlackjackGame
                 ResetTable();
                 return;
             }
-            playerOne.Bet(playerBet); //Validate Double And Split buttons here. 
+            InsuranceCheck();
+
+            //Validate Double And Split buttons here. 
             if (playerOne.PlayerMoney < playerOne.PlayerBet * 2)
             {
                 DoubleButton.Enabled = true;
@@ -305,6 +316,42 @@ namespace BlackjackGame
         private bool BetCheck()
         {
             return false;
+        }
+        /// <summary>
+        /// Enables the Insurance Button during the Opening Check if Dealer holds an ace.
+        /// </summary>
+        private void InsuranceCheck()
+        {
+            if (dealer.CurrentHand[0].Value == 11)
+            {
+                btnInsurance.Visible = true;
+                btnInsurance.Enabled = true;
+            }
+        }
+
+        private void btnInsurance_Click(object sender, EventArgs e)
+        {
+            btnInsurance.Enabled = false;
+            playerOne.TakesInsurance();
+            if (dealer.CurrentHand[1].Value == 10)
+            {
+                //Text about that here
+                playerOne.WonInsurance();
+                ResetTable();
+            }
+            else
+            {
+                //Text that dealer did not have blackjack
+                playerOne.LostInsurance();
+            }
+        }
+        /// <summary>
+        /// Hides and disables Insurance Button
+        /// </summary>
+        private void HideInsuranceButton()
+        {
+            btnInsurance.Enabled = false;
+            btnInsurance.Visible = false;
         }
     }
 }
