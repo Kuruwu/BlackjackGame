@@ -228,7 +228,7 @@
             // BetAmount
             // 
             BetAmount.AutoSize = true;
-            BetAmount.Font = new Font("Stencil", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            BetAmount.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             BetAmount.ForeColor = SystemColors.Window;
             BetAmount.Location = new Point(608, 33);
             BetAmount.Name = "BetAmount";
@@ -239,13 +239,13 @@
             // 
             BetTitle.BackColor = Color.ForestGreen;
             BetTitle.BorderStyle = BorderStyle.None;
-            BetTitle.Font = new Font("Stencil", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            BetTitle.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             BetTitle.ForeColor = SystemColors.Window;
             BetTitle.Location = new Point(608, 5);
             BetTitle.Name = "BetTitle";
             BetTitle.Size = new Size(159, 25);
             BetTitle.TabIndex = 6;
-            BetTitle.Text = "Current Bet:";
+            BetTitle.Text = "Current Bet";
             // 
             // SplitButton
             // 
@@ -303,7 +303,7 @@
             // BlackjackTitle
             // 
             BlackjackTitle.AutoSize = true;
-            BlackjackTitle.Font = new Font("Stencil", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            BlackjackTitle.Font = new Font("Microsoft Sans Serif", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
             BlackjackTitle.ForeColor = SystemColors.ButtonHighlight;
             BlackjackTitle.Location = new Point(262, 2);
             BlackjackTitle.Margin = new Padding(2, 0, 2, 0);
@@ -455,7 +455,7 @@
             // rulesLabel
             // 
             rulesLabel.AutoSize = true;
-            rulesLabel.Font = new Font("Stencil", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            rulesLabel.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Regular, GraphicsUnit.Point);
             rulesLabel.ForeColor = SystemColors.ButtonHighlight;
             rulesLabel.Location = new Point(342, 12);
             rulesLabel.Margin = new Padding(2, 0, 2, 0);

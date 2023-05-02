@@ -153,10 +153,12 @@ namespace BlackjackGame
             {
                 return;
             }
-            else
+            else if (playerCurrentMoney >= 10)
             {
                 playerBet += 10;
                 playerCurrentBet.Text = playerBet.ToString();
+                playerCurrentMoney = playerCurrentMoney - 10;
+                playerMoneyLabel.Text = playerCurrentMoney.ToString();
             }
         }
 
@@ -170,6 +172,8 @@ namespace BlackjackGame
             {
                 playerBet -= 10;
                 playerCurrentBet.Text = playerBet.ToString();
+                playerCurrentMoney = playerCurrentMoney + 10;
+                playerMoneyLabel.Text = playerCurrentMoney.ToString();
             }
         }
         private void UpdateCardImages()
