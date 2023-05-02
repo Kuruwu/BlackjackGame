@@ -41,7 +41,7 @@ namespace BlackjackGame
             if (dealer.CalculateHandValue() < 17) //Dealer must hit up to 17 and stand.
             {
                 dealer.AddCardToHand(deck.DrawCard());
-                if (dealer.CalculateHandValue() > 21)
+                if (dealer.CalculateHandValue() > 21) //Dealer has bust
                 {
                     lblDealerTotal.Text = dealer.CalculateHandValue().ToString() + " " + "BUST";
                     dealerTimer.Stop();
@@ -52,7 +52,6 @@ namespace BlackjackGame
                     lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
                 }
             }
-
             else if (dealer.CalculateHandValue() < 22) //Dealers hand is 17-21
             {
                 lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
@@ -184,7 +183,9 @@ namespace BlackjackGame
                 playerMoneyLabel.Text = playerCurrentMoney.ToString();
             }
         }
-
+        /// <summary>
+        /// Updates the card images from the resource file based on naming format for dealer and player. 
+        /// </summary>
         private void UpdateCardImages()
         {
             for (int i = 0; i < playerOne.CurrentHand.Count; i++)
@@ -275,18 +276,26 @@ namespace BlackjackGame
         /// <param name="e"></param>
         private void OpeningHand(object sender, EventArgs e)
         {
-
+            //Dealing opening hands in alternate order.
             if (playerOne.CurrentHand.Count < 2)
             {
-                playerOne.AddCardToHand(deck.DrawCard());
-                lblPlayerTotal.Text = playerOne.CalculateHandValue().ToString();
+                if (playerOne.CurrentHand.Count == 1 && dealer.CurrentHand.Count == 0)
+                {
+                    dealer.AddCardToHand(deck.DrawCard());
+                    lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
+                }
+                else
+                {
+                    playerOne.AddCardToHand(deck.DrawCard());
+                    lblPlayerTotal.Text = playerOne.CalculateHandValue().ToString();
+                }
             }
             else if (dealer.CurrentHand.Count < 2)
             {
                 if (dealer.CurrentHand.Count == 1)
                 {
                     dealer.AddCardToHand(deck.DrawCard());
-                    dealer.CurrentHand[1].flipCard(); //Need to do flipcard better because it's drawing it for a microsecond before i manually force an update
+                    dealer.CurrentHand[1].flipCard(); //Flip dealers hidden card. 
                     UpdateCardImages();
                     lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
                 }
