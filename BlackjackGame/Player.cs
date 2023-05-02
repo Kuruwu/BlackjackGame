@@ -49,7 +49,7 @@ namespace BlackjackGame
         public void TakesInsurance()
         {
             sideBet = (playerBet / 2);
-            playerMoney -= sideBet; //Need to check if they can afford it
+            playerMoney -= sideBet; 
         }
         public void WonInsurance()
         {

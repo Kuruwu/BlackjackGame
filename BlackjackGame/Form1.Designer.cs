@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             blackjackTab = new TabControl();
             gameTab = new TabPage();
-            playerMoneyLabel = new Label();
             btnInsurance = new Button();
             lblWinCondition = new Label();
             lblDealerTotal = new Label();
@@ -49,6 +48,8 @@
             HitButton = new Button();
             BlackjackTitle = new Label();
             panelPlayerCards = new Panel();
+            lblPlayerMoneyTitle = new Label();
+            playerMoneyLabel = new Label();
             pctPlayerCard5 = new PictureBox();
             pctPlayerCard1 = new PictureBox();
             pctPlayerCard2 = new PictureBox();
@@ -63,7 +64,6 @@
             rulesTab = new TabPage();
             label1 = new Label();
             rulesLabel = new Label();
-            lblPlayerMoneyTitle = new Label();
             blackjackTab.SuspendLayout();
             gameTab.SuspendLayout();
             panelPlayerCards.SuspendLayout();
@@ -123,15 +123,6 @@
             gameTab.TabIndex = 0;
             gameTab.Text = "Game";
             // 
-            // playerMoneyLabel
-            // 
-            playerMoneyLabel.AutoSize = true;
-            playerMoneyLabel.Location = new Point(191, 143);
-            playerMoneyLabel.Name = "playerMoneyLabel";
-            playerMoneyLabel.Size = new Size(154, 15);
-            playerMoneyLabel.TabIndex = 30;
-            playerMoneyLabel.Text = "Players total money go here";
-            // 
             // btnInsurance
             // 
             btnInsurance.BackColor = Color.DeepSkyBlue;
@@ -172,6 +163,7 @@
             // btnBet
             // 
             btnBet.BackColor = Color.LimeGreen;
+            btnBet.Enabled = false;
             btnBet.Location = new Point(609, 92);
             btnBet.Name = "btnBet";
             btnBet.Size = new Size(159, 45);
@@ -339,6 +331,26 @@
             panelPlayerCards.Size = new Size(528, 159);
             panelPlayerCards.TabIndex = 28;
             // 
+            // lblPlayerMoneyTitle
+            // 
+            lblPlayerMoneyTitle.AutoSize = true;
+            lblPlayerMoneyTitle.ForeColor = SystemColors.ButtonHighlight;
+            lblPlayerMoneyTitle.Location = new Point(103, 143);
+            lblPlayerMoneyTitle.Name = "lblPlayerMoneyTitle";
+            lblPlayerMoneyTitle.Size = new Size(82, 15);
+            lblPlayerMoneyTitle.TabIndex = 22;
+            lblPlayerMoneyTitle.Text = "Player Money:";
+            // 
+            // playerMoneyLabel
+            // 
+            playerMoneyLabel.AutoSize = true;
+            playerMoneyLabel.ForeColor = SystemColors.ButtonHighlight;
+            playerMoneyLabel.Location = new Point(191, 143);
+            playerMoneyLabel.Name = "playerMoneyLabel";
+            playerMoneyLabel.Size = new Size(154, 15);
+            playerMoneyLabel.TabIndex = 30;
+            playerMoneyLabel.Text = "Players total money go here";
+            // 
             // pctPlayerCard5
             // 
             pctPlayerCard5.Location = new Point(384, 29);
@@ -477,15 +489,6 @@
             rulesLabel.Size = new Size(105, 31);
             rulesLabel.TabIndex = 0;
             rulesLabel.Text = "RULES";
-            // 
-            // lblPlayerMoneyTitle
-            // 
-            lblPlayerMoneyTitle.AutoSize = true;
-            lblPlayerMoneyTitle.Location = new Point(103, 143);
-            lblPlayerMoneyTitle.Name = "lblPlayerMoneyTitle";
-            lblPlayerMoneyTitle.Size = new Size(82, 15);
-            lblPlayerMoneyTitle.TabIndex = 22;
-            lblPlayerMoneyTitle.Text = "Player Money:";
             // 
             // Form1
             // 

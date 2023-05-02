@@ -6,7 +6,7 @@ namespace BlackjackGame
 {
     public partial class Form1 : Form
     {
-        Player playerOne = new Player("John", 100);
+        Player playerOne = new Player("John", 500);
         Player dealer = new Player("Dealer", 0);
         Deck deck = new Deck();
         System.Windows.Forms.Timer dealerTimer = new System.Windows.Forms.Timer();
@@ -77,8 +77,7 @@ namespace BlackjackGame
             lblWinCondition.Visible = false;
             lblPlayerTotal.Text = "0";
             lblDealerTotal.Text = "0";
-            playerOne.PlayerBet = 0; //Reset the bet here because it's easier. 
-            btnBet.Enabled = true;
+            playerOne.PlayerBet = 0; //Reset the bet here because it's easier.
             increaseBet.Enabled = true;
             reduceBet.Enabled = true;
             UpdateMoneyDisplay();
@@ -95,11 +94,13 @@ namespace BlackjackGame
         {
             DisablePlayButtons();
             deck.ShuffleDeck();
+            playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
         }
 
         private void HitButton_Click(object sender, EventArgs e)
         {
             HideInsuranceButton();
+            DisableDoubleButton();
             playerOne.AddCardToHand(deck.DrawCard());
             int playerOneHandTotal = playerOne.CalculateHandValue();
             lblPlayerTotal.Text = playerOneHandTotal.ToString();
@@ -112,13 +113,13 @@ namespace BlackjackGame
             }
             else if (playerOneHandTotal == 21) //If player has 21 then auto stand.
             {
-                HitButton.Enabled = false;
+                DisableHitButton();
                 StandButton_Click(sender, e);
             }
             else if (playerOneHandTotal > 21) //Player Busts and loses.
             {
                 lblPlayerTotal.Text = playerOneHandTotal + " " + "BUST";
-                HitButton.Enabled = false;
+                DisableHitButton();
                 dealer.CurrentHand[1].flipCard(); //If you bust it flips dealers hidden card and shows lose.
                 UpdateCardImages();
                 lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
@@ -131,6 +132,9 @@ namespace BlackjackGame
         private void StandButton_Click(object sender, EventArgs e)
         {
             HideInsuranceButton();
+            DisableDoubleButton();
+            DisableHitButton();
+            DisableStandButton();
             dealerTimer.Start();
             if (dealer.CurrentHand.Count! > 1) //Inside Array bounds Check
             {
@@ -138,8 +142,6 @@ namespace BlackjackGame
                 UpdateCardImages();
                 lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
             }
-            HitButton.Enabled = false;
-            StandButton.Enabled = false;
         }
 
         private void DoubleButton_Click(object sender, EventArgs e)
@@ -148,12 +150,12 @@ namespace BlackjackGame
             playerOne.PlayerBetsDouble();
             playerOne.AddCardToHand(deck.DrawCard());
             UpdateMoneyDisplay();
-            HitButton.Enabled = false;
+            DisableHitButton();
             int playerOneHandTotal = playerOne.CalculateHandValue();
             if (playerOneHandTotal > 21) //Player Busts and loses.
             {
                 lblPlayerTotal.Text = playerOneHandTotal + " " + "BUST";
-                HitButton.Enabled = false;
+                DisableHitButton();
                 dealer.CurrentHand[1].flipCard(); //If you bust it flips dealers hidden card and shows lose.
                 UpdateCardImages();
                 lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
@@ -165,7 +167,7 @@ namespace BlackjackGame
             {
                 lblPlayerTotal.Text = playerOneHandTotal.ToString(); //Need to do a bust check here, Refactor code from hit.
                 StandButton_Click((object)sender, e);
-            }    
+            }
         }
 
         private void SplitButton_Click(object sender, EventArgs e)
@@ -185,6 +187,10 @@ namespace BlackjackGame
                 playerCurrentBet.Text = playerOne.PlayerBet.ToString();
                 playerOne.PlayerMoney = playerOne.PlayerMoney - 10;
                 playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
+                if (playerOne.PlayerBet > 0)
+                {
+                    EnableBetButton(); //Enabling bet button if bet. 
+                }
             }
         }
 
@@ -200,6 +206,10 @@ namespace BlackjackGame
                 playerCurrentBet.Text = playerOne.PlayerBet.ToString();
                 playerOne.PlayerMoney = playerOne.PlayerMoney + 10;
                 playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
+                if (playerOne.PlayerBet == 0)
+                {
+                    DisableBetButton(); //Disabling bet button if no bet
+                }
             }
         }
         /// <summary>
@@ -230,10 +240,8 @@ namespace BlackjackGame
 
         private void btnBet_Click(object sender, EventArgs e)
         {
-            btnBet.Enabled = false;
-            DisableBetButtons();
-            HitButton.Enabled = true;
-            StandButton.Enabled = true;
+            DisableBetButton();
+            DisableBetAmountControls();;
             openingHandTimer.Start();
         }
         /// <summary>
@@ -327,6 +335,8 @@ namespace BlackjackGame
             {
                 openingHandTimer.Stop();
                 OpeningHandCheck();
+                EnableHitButton();
+                EnableStandButton();
 
             }
         }
@@ -343,13 +353,15 @@ namespace BlackjackGame
                 ResetTable();
                 return;
             }
-            InsuranceCheck();
-            //SplitCheckHere
-
+            //Checking if player can afford insurance. 
+            if (playerOne.PlayerMoney >= playerOne.PlayerBet / 2)
+            {
+                InsuranceCheck();
+            }
             //If player can afford doubling their bet.
             if (playerOne.PlayerMoney >= playerOne.PlayerBet)
             {
-                DoubleButton.Enabled = true;
+                EnableDoubleButton();
             }
         }
         private bool BetCheck()
@@ -372,6 +384,7 @@ namespace BlackjackGame
         {
             btnInsurance.Enabled = false;
             playerOne.TakesInsurance();
+            UpdateMoneyDisplay();
             if (dealer.CurrentHand[1].Value == 10)
             {
                 dealer.CurrentHand[1].flipCard();
@@ -381,8 +394,9 @@ namespace BlackjackGame
             }
             else
             {
-                //Text that dealer did not have blackjack
+                MessageBox.Show("Dealer Does not have Blackjack");
                 playerOne.LostInsurance();
+                UpdateMoneyDisplay();
             }
         }
         /// <summary>
@@ -398,31 +412,59 @@ namespace BlackjackGame
         /// </summary>
         private void DisablePlayButtons() //Do this last
         {
-            HitButton.Enabled = false;
-            HitButton.BackColor = Color.LimeGreen;
-            StandButton.Enabled = false;
-            StandButton.BackColor = Color.LimeGreen;
-            DoubleButton.Enabled = false;
-            DoubleButton.BackColor = Color.LimeGreen;
+            DisableHitButton();
+            DisableStandButton();
+            DisableDoubleButton();
             SplitButton.Enabled = false;
             SplitButton.BackColor = Color.LimeGreen;
+        }
+        private void EnableBetButton()
+        {
+            btnBet.Enabled = true;
+            btnBet.BackColor = Color.DeepSkyBlue;
+        }
+        private void DisableBetButton()
+        {
+            btnBet.Enabled = false;
+            btnBet.BackColor = Color.LimeGreen;
         }
         private void EnableHitButton()
         {
             HitButton.Enabled = true;
-            HitButton.BackColor = Color.LightBlue;
+            HitButton.BackColor = Color.DeepSkyBlue;
         }
         private void DisableHitButton()
         {
-            HitButton.Enabled = true;
-            HitButton.BackColor = Color.LightBlue;
+            HitButton.Enabled = false;
+            HitButton.BackColor = Color.LimeGreen;
+        }
+        private void EnableStandButton()
+        {
+            StandButton.Enabled = true;
+            StandButton.BackColor = Color.DeepSkyBlue;
+
+        }
+        private void DisableStandButton()
+        {
+            StandButton.Enabled = false;
+            StandButton.BackColor = Color.LimeGreen;
+        }
+        private void EnableDoubleButton()
+        {
+            DoubleButton.Enabled = true;
+            DoubleButton.BackColor = Color.DeepSkyBlue;
+        }
+        private void DisableDoubleButton()
+        {
+            DoubleButton.Enabled = false;
+            DoubleButton.BackColor = Color.LimeGreen;
         }
         private void UpdateMoneyDisplay()
         {
             playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
             playerCurrentBet.Text = playerOne.PlayerBet.ToString();
         }
-        private void DisableBetButtons()
+        private void DisableBetAmountControls()
         {
             increaseBet.Enabled = false;
             reduceBet.Enabled = false;
