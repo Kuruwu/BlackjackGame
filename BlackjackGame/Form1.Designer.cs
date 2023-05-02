@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             blackjackTab = new TabControl();
             gameTab = new TabPage();
+            playerMoneyLabel = new Label();
             btnInsurance = new Button();
             lblWinCondition = new Label();
             lblDealerTotal = new Label();
@@ -62,7 +63,6 @@
             rulesTab = new TabPage();
             label1 = new Label();
             rulesLabel = new Label();
-            playerMoneyLabel = new Label();
             blackjackTab.SuspendLayout();
             gameTab.SuspendLayout();
             panelPlayerCards.SuspendLayout();
@@ -123,6 +123,15 @@
             gameTab.TabIndex = 0;
             gameTab.Text = "Game";
             // 
+            // playerMoneyLabel
+            // 
+            playerMoneyLabel.AutoSize = true;
+            playerMoneyLabel.Location = new Point(8, 199);
+            playerMoneyLabel.Name = "playerMoneyLabel";
+            playerMoneyLabel.Size = new Size(154, 15);
+            playerMoneyLabel.TabIndex = 30;
+            playerMoneyLabel.Text = "Players total money go here";
+            // 
             // btnInsurance
             // 
             btnInsurance.BackColor = Color.DeepSkyBlue;
@@ -156,9 +165,9 @@
             lblDealerTotal.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             lblDealerTotal.Location = new Point(50, 105);
             lblDealerTotal.Name = "lblDealerTotal";
-            lblDealerTotal.Size = new Size(37, 32);
+            lblDealerTotal.Size = new Size(27, 32);
             lblDealerTotal.TabIndex = 26;
-            lblDealerTotal.Text = "Hi";
+            lblDealerTotal.Text = "0";
             // 
             // btnBet
             // 
@@ -177,9 +186,9 @@
             lblPlayerTotal.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             lblPlayerTotal.Location = new Point(50, 324);
             lblPlayerTotal.Name = "lblPlayerTotal";
-            lblPlayerTotal.Size = new Size(37, 32);
+            lblPlayerTotal.Size = new Size(27, 32);
             lblPlayerTotal.TabIndex = 24;
-            lblPlayerTotal.Text = "Hi";
+            lblPlayerTotal.Text = "0";
             // 
             // increaseBet
             // 
@@ -465,15 +474,6 @@
             rulesLabel.Size = new Size(105, 31);
             rulesLabel.TabIndex = 0;
             rulesLabel.Text = "RULES";
-            // 
-            // playerMoneyLabel
-            // 
-            playerMoneyLabel.AutoSize = true;
-            playerMoneyLabel.Location = new Point(63, 209);
-            playerMoneyLabel.Name = "playerMoneyLabel";
-            playerMoneyLabel.Size = new Size(38, 15);
-            playerMoneyLabel.TabIndex = 30;
-            playerMoneyLabel.Text = "label2";
             // 
             // Form1
             // 

@@ -17,8 +17,17 @@ namespace BlackjackGame
         int sideBet;
         List<Card> currentHand = new List<Card>();
 
-        public int PlayerMoney { get; set; }
-        public int PlayerBet { get; set; }
+        public int PlayerMoney
+        {
+            get { return playerMoney; }
+            set { playerMoney = value; }
+        }
+        public int PlayerBet
+        {
+            get { return playerBet; }
+            set { playerBet = value; }
+        }
+
         public Player(string playerName, int playerMoney)
         {
             this.playerName = playerName;
@@ -45,6 +54,7 @@ namespace BlackjackGame
         {
             sideBet *= 3;
             playerMoney += sideBet;
+            sideBet = 0;
         }
         public void LostInsurance()
         {
@@ -61,10 +71,19 @@ namespace BlackjackGame
         public void PlayerWinsHand()
         {
             playerMoney += playerBet * 2;
+
+        }
+        public void PlayerLosesHand()
+        {
+            playerBet = 0;
+        }
+        public void PlayerDrawsHand()
+        {
+            playerMoney += playerBet;
         }
         public void PlayerBetsDouble()
         {
-            sideBet = playerBet * 2; //Validate if they can afford it again.
+            sideBet = playerBet * 2;
         }
         public int CalculateHandValue()
         {

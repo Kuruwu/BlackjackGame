@@ -6,14 +6,13 @@ namespace BlackjackGame
 {
     public partial class Form1 : Form
     {
-        Player playerOne = new Player("", 500);
+        Player playerOne = new Player("John", 1000);
         Player dealer = new Player("Dealer", 0);
         Deck deck = new Deck();
         System.Windows.Forms.Timer dealerTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer tableTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer openingHandTimer = new System.Windows.Forms.Timer();
-        int playerBet = 0;
-        int playerCurrentMoney = Money.CashValueRetrieve;
+
 
         public Form1()
         {
@@ -28,8 +27,6 @@ namespace BlackjackGame
             lblWinCondition.Visible = false;
             openingHandTimer.Interval = 500; //0.5 seconds
             openingHandTimer.Tick += new EventHandler(OpeningHand);
-            playerCurrentMoney = Money.CashValueRetrieve;
-            playerMoneyLabel.Text = playerCurrentMoney.ToString();
         }
         /// <summary>
         /// Event handler for dealer drawing cards with intervals between them.
@@ -80,6 +77,7 @@ namespace BlackjackGame
             lblPlayerTotal.Text = "0";
             lblDealerTotal.Text = "0";
             btnBet.Enabled = true;
+            UpdateMoneyDisplay();
             UpdateCardImages();
             tableTimer.Stop();
         }
@@ -104,7 +102,7 @@ namespace BlackjackGame
             if (playerOne.FiveCardTrick()) //If player has 5 cards not greater than 21 win by default. 
             {
                 playerOne.PlayerWinsHand();
-                lblWinCondition.Text = "You Win Five Card Trick";
+                lblWinCondition.Text = "You Win";
                 lblWinCondition.Visible = true;
                 ResetTable();
             }
@@ -119,6 +117,7 @@ namespace BlackjackGame
                 HitButton.Enabled = false;
                 dealer.CurrentHand[1].flipCard(); //If you bust it flips dealers hidden card and shows lose.
                 UpdateCardImages();
+                lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
                 lblWinCondition.Text = "You Lose";
                 lblWinCondition.Visible = true;
                 ResetTable();
@@ -144,6 +143,7 @@ namespace BlackjackGame
             HideInsuranceButton();
             playerOne.PlayerBetsDouble();
             playerOne.AddCardToHand(deck.DrawCard());
+            UpdateMoneyDisplay();
             HitButton.Enabled = false;
             lblPlayerTotal.Text = playerOne.CalculateHandValue().ToString(); //Need to do a bust check here, Refactor code from hit.
             StandButton_Click((object)sender, e);
@@ -156,31 +156,31 @@ namespace BlackjackGame
 
         private void increaseBet_Click(object sender, EventArgs e)
         {
-            if (playerBet == playerOne.PlayerMoney) //Not Working
+            if (playerOne.PlayerBet == playerOne.PlayerMoney)
             {
                 return;
             }
-            else if (playerCurrentMoney >= 10)
+            else if (playerOne.PlayerMoney >= 10)
             {
-                playerBet += 10;
-                playerCurrentBet.Text = playerBet.ToString();
-                playerCurrentMoney = playerCurrentMoney - 10;
-                playerMoneyLabel.Text = playerCurrentMoney.ToString();
+                playerOne.PlayerBet += 10;
+                playerCurrentBet.Text = playerOne.PlayerBet.ToString();
+                playerOne.PlayerMoney = playerOne.PlayerMoney - 10;
+                playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
             }
         }
 
         private void reduceBet_Click(object sender, EventArgs e)
         {
-            if (playerBet == 0)
+            if (playerOne.PlayerBet == 0)
             {
                 return;
             }
             else
             {
-                playerBet -= 10;
-                playerCurrentBet.Text = playerBet.ToString();
-                playerCurrentMoney = playerCurrentMoney + 10;
-                playerMoneyLabel.Text = playerCurrentMoney.ToString();
+                playerOne.PlayerBet -= 10;
+                playerCurrentBet.Text = playerOne.PlayerBet.ToString();
+                playerOne.PlayerMoney = playerOne.PlayerMoney + 10;
+                playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
             }
         }
         /// <summary>
@@ -212,7 +212,8 @@ namespace BlackjackGame
         private void btnBet_Click(object sender, EventArgs e)
         {
             btnBet.Enabled = false;
-            playerOne.Bet(playerBet); //Temp Bet
+            DisableBetButtons();
+            playerOne.Bet(playerOne.PlayerBet); //Temp Bet
             HitButton.Enabled = true;
             StandButton.Enabled = true;
             openingHandTimer.Start();
@@ -231,7 +232,6 @@ namespace BlackjackGame
             DisablePlayButtons();
             deck.ResetDeck();
             deck.ShuffleDeck();
-
         }
         /// <summary>
         /// Checks all the basic win conditions. 
@@ -328,8 +328,8 @@ namespace BlackjackGame
             InsuranceCheck();
             //SplitCheckHere
 
-            //Validate Double And Split buttons here. 
-            if (playerOne.PlayerMoney < playerOne.PlayerBet * 2)
+            //If player can afford doubling their bet.
+            if (playerOne.PlayerMoney > playerOne.PlayerBet)
             {
                 DoubleButton.Enabled = true;
             }
@@ -389,5 +389,21 @@ namespace BlackjackGame
             SplitButton.Enabled = false;
             SplitButton.BackColor = Color.LimeGreen;
         }
+        private void EnableHitButton()
+        {
+            HitButton.Enabled = true;
+            HitButton.BackColor = Color.LightBlue;
+        }
+        private void UpdateMoneyDisplay()
+        {
+            playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
+            playerCurrentBet.Text = playerOne.PlayerBet.ToString();
+        }
+        private void DisableBetButtons()
+        {
+            increaseBet.Enabled = false;
+            reduceBet.Enabled = false;
+        }
+
     }
 }
