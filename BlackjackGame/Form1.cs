@@ -41,19 +41,24 @@ namespace BlackjackGame
             if (dealer.CalculateHandValue() < 17) //Dealer must hit up to 17 and stand.
             {
                 dealer.AddCardToHand(deck.DrawCard());
-                lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
                 if (dealer.CalculateHandValue() > 21)
                 {
                     lblDealerTotal.Text = dealer.CalculateHandValue().ToString() + " " + "BUST";
+                    dealerTimer.Stop();
+                    CheckWinCondition();
                 }
-
+                else
+                {
+                    lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
+                }
             }
-            else
+
+            else if (dealer.CalculateHandValue() < 22) //Dealers hand is 17-21
             {
-                dealerTimer.Stop(); //Stop the timer to prevent further events. 
+                lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
+                dealerTimer.Stop(); //Stop the timer to prevent further tick events. 
                 CheckWinCondition();
             }
-
         }
         /// <summary>
         /// Event handler for Clearing the table on a timer. 
@@ -221,6 +226,7 @@ namespace BlackjackGame
             playerOne.CurrentHand.Clear();
             dealer.CurrentHand.Clear();
             btnBet.Enabled = false;
+            HideInsuranceButton();
             DisablePlayButtons();
             deck.ResetDeck();
             deck.ShuffleDeck();
