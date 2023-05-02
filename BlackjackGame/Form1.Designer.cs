@@ -62,6 +62,7 @@
             rulesTab = new TabPage();
             label1 = new Label();
             rulesLabel = new Label();
+            playerMoneyLabel = new Label();
             blackjackTab.SuspendLayout();
             gameTab.SuspendLayout();
             panelPlayerCards.SuspendLayout();
@@ -94,6 +95,7 @@
             // gameTab
             // 
             gameTab.BackColor = Color.ForestGreen;
+            gameTab.Controls.Add(playerMoneyLabel);
             gameTab.Controls.Add(btnInsurance);
             gameTab.Controls.Add(lblWinCondition);
             gameTab.Controls.Add(lblDealerTotal);
@@ -232,7 +234,7 @@
             BetAmount.ForeColor = SystemColors.Window;
             BetAmount.Location = new Point(608, 33);
             BetAmount.Name = "BetAmount";
-            BetAmount.Size = new Size(0, 22);
+            BetAmount.Size = new Size(0, 24);
             BetAmount.TabIndex = 7;
             // 
             // BetTitle
@@ -243,7 +245,7 @@
             BetTitle.ForeColor = SystemColors.Window;
             BetTitle.Location = new Point(608, 5);
             BetTitle.Name = "BetTitle";
-            BetTitle.Size = new Size(159, 25);
+            BetTitle.Size = new Size(159, 24);
             BetTitle.TabIndex = 6;
             BetTitle.Text = "Current Bet";
             // 
@@ -308,7 +310,7 @@
             BlackjackTitle.Location = new Point(262, 2);
             BlackjackTitle.Margin = new Padding(2, 0, 2, 0);
             BlackjackTitle.Name = "BlackjackTitle";
-            BlackjackTitle.Size = new Size(228, 44);
+            BlackjackTitle.Size = new Size(237, 42);
             BlackjackTitle.TabIndex = 1;
             BlackjackTitle.Text = "BLACKJACK";
             BlackjackTitle.TextAlign = ContentAlignment.TopCenter;
@@ -460,9 +462,18 @@
             rulesLabel.Location = new Point(342, 12);
             rulesLabel.Margin = new Padding(2, 0, 2, 0);
             rulesLabel.Name = "rulesLabel";
-            rulesLabel.Size = new Size(96, 32);
+            rulesLabel.Size = new Size(105, 31);
             rulesLabel.TabIndex = 0;
             rulesLabel.Text = "RULES";
+            // 
+            // playerMoneyLabel
+            // 
+            playerMoneyLabel.AutoSize = true;
+            playerMoneyLabel.Location = new Point(63, 209);
+            playerMoneyLabel.Name = "playerMoneyLabel";
+            playerMoneyLabel.Size = new Size(38, 15);
+            playerMoneyLabel.TabIndex = 30;
+            playerMoneyLabel.Text = "label2";
             // 
             // Form1
             // 
@@ -532,5 +543,6 @@
         private Panel panelPlayerCards;
         private Panel panelDealersCards;
         private Button btnInsurance;
+        private Label playerMoneyLabel;
     }
 }

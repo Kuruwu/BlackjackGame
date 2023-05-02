@@ -13,6 +13,7 @@ namespace BlackjackGame
         System.Windows.Forms.Timer tableTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer openingHandTimer = new System.Windows.Forms.Timer();
         int playerBet = 0;
+        int playerCurrentMoney = Money.CashValueRetrieve;
 
         public Form1()
         {
@@ -27,6 +28,8 @@ namespace BlackjackGame
             lblWinCondition.Visible = false;
             openingHandTimer.Interval = 500; //0.5 seconds
             openingHandTimer.Tick += new EventHandler(OpeningHand);
+            playerCurrentMoney = Money.CashValueRetrieve;
+            playerMoneyLabel.Text = playerCurrentMoney.ToString();
         }
         /// <summary>
         /// Event handler for dealer drawing cards with intervals between them.
@@ -176,6 +179,7 @@ namespace BlackjackGame
                 playerMoneyLabel.Text = playerCurrentMoney.ToString();
             }
         }
+
         private void UpdateCardImages()
         {
             for (int i = 0; i < playerOne.CurrentHand.Count; i++)
