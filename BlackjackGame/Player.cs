@@ -37,8 +37,9 @@ namespace BlackjackGame
 
         public void Bet(int amount)
         {
-            playerBet = amount;
-            playerMoney = playerMoney - amount;
+            //Might not need to exist.
+            //playerBet = amount;
+            //playerMoney = playerMoney - amount;
         }
         public void AddCardToHand(Card card)
         {
@@ -83,7 +84,8 @@ namespace BlackjackGame
         }
         public void PlayerBetsDouble()
         {
-            sideBet = playerBet * 2;
+            playerMoney -= playerBet;
+            playerBet = playerBet * 2;
         }
         public int CalculateHandValue()
         {

@@ -6,12 +6,13 @@ namespace BlackjackGame
 {
     public partial class Form1 : Form
     {
-        Player playerOne = new Player("John", 1000);
+        Player playerOne = new Player("John", 100);
         Player dealer = new Player("Dealer", 0);
         Deck deck = new Deck();
         System.Windows.Forms.Timer dealerTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer tableTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer openingHandTimer = new System.Windows.Forms.Timer();
+        int rebet = 0;
 
 
         public Form1()
@@ -76,7 +77,10 @@ namespace BlackjackGame
             lblWinCondition.Visible = false;
             lblPlayerTotal.Text = "0";
             lblDealerTotal.Text = "0";
+            playerOne.PlayerBet = 0; //Reset the bet here because it's easier. 
             btnBet.Enabled = true;
+            increaseBet.Enabled = true;
+            reduceBet.Enabled = true;
             UpdateMoneyDisplay();
             UpdateCardImages();
             tableTimer.Stop();
@@ -145,8 +149,23 @@ namespace BlackjackGame
             playerOne.AddCardToHand(deck.DrawCard());
             UpdateMoneyDisplay();
             HitButton.Enabled = false;
-            lblPlayerTotal.Text = playerOne.CalculateHandValue().ToString(); //Need to do a bust check here, Refactor code from hit.
-            StandButton_Click((object)sender, e);
+            int playerOneHandTotal = playerOne.CalculateHandValue();
+            if (playerOneHandTotal > 21) //Player Busts and loses.
+            {
+                lblPlayerTotal.Text = playerOneHandTotal + " " + "BUST";
+                HitButton.Enabled = false;
+                dealer.CurrentHand[1].flipCard(); //If you bust it flips dealers hidden card and shows lose.
+                UpdateCardImages();
+                lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
+                lblWinCondition.Text = "You Lose";
+                lblWinCondition.Visible = true;
+                ResetTable();
+            }
+            else
+            {
+                lblPlayerTotal.Text = playerOneHandTotal.ToString(); //Need to do a bust check here, Refactor code from hit.
+                StandButton_Click((object)sender, e);
+            }    
         }
 
         private void SplitButton_Click(object sender, EventArgs e)
@@ -156,7 +175,7 @@ namespace BlackjackGame
 
         private void increaseBet_Click(object sender, EventArgs e)
         {
-            if (playerOne.PlayerBet == playerOne.PlayerMoney)
+            if (playerOne.PlayerMoney == 0)
             {
                 return;
             }
@@ -213,7 +232,6 @@ namespace BlackjackGame
         {
             btnBet.Enabled = false;
             DisableBetButtons();
-            playerOne.Bet(playerOne.PlayerBet); //Temp Bet
             HitButton.Enabled = true;
             StandButton.Enabled = true;
             openingHandTimer.Start();
@@ -329,7 +347,7 @@ namespace BlackjackGame
             //SplitCheckHere
 
             //If player can afford doubling their bet.
-            if (playerOne.PlayerMoney > playerOne.PlayerBet)
+            if (playerOne.PlayerMoney >= playerOne.PlayerBet)
             {
                 DoubleButton.Enabled = true;
             }
@@ -390,6 +408,11 @@ namespace BlackjackGame
             SplitButton.BackColor = Color.LimeGreen;
         }
         private void EnableHitButton()
+        {
+            HitButton.Enabled = true;
+            HitButton.BackColor = Color.LightBlue;
+        }
+        private void DisableHitButton()
         {
             HitButton.Enabled = true;
             HitButton.BackColor = Color.LightBlue;
