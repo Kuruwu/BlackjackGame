@@ -87,10 +87,7 @@ namespace BlackjackGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            HitButton.Enabled = false;
-            StandButton.Enabled = false;
-            DoubleButton.Enabled = false;
-            SplitButton.Enabled = false;
+            DisablePlayButtons();
             deck.ShuffleDeck();
         }
 
@@ -140,8 +137,11 @@ namespace BlackjackGame
 
         private void DoubleButton_Click(object sender, EventArgs e)
         {
+            HideInsuranceButton();
+            playerOne.PlayerBetsDouble();
             playerOne.AddCardToHand(deck.DrawCard());
             HitButton.Enabled = false;
+            lblPlayerTotal.Text = playerOne.CalculateHandValue().ToString(); //Need to do a bust check here, Refactor code from hit.
             StandButton_Click((object)sender, e);
         }
 
@@ -221,10 +221,7 @@ namespace BlackjackGame
             playerOne.CurrentHand.Clear();
             dealer.CurrentHand.Clear();
             btnBet.Enabled = false;
-            HitButton.Enabled = false;
-            StandButton.Enabled = false;
-            DoubleButton.Enabled = false;
-            SplitButton.Enabled = false;
+            DisablePlayButtons();
             deck.ResetDeck();
             deck.ShuffleDeck();
 
@@ -307,13 +304,14 @@ namespace BlackjackGame
         {
             if (playerOne.CalculateHandValue() == 21)
             {
-                playerOne.PlayerWinsHand();
+                playerOne.PlayerWinsHand(); //Playerwin blackjack instead?
                 lblWinCondition.Text = "BLACKJACK";
                 lblWinCondition.Visible = true;
                 ResetTable();
                 return;
             }
             InsuranceCheck();
+            //SplitCheckHere
 
             //Validate Double And Split buttons here. 
             if (playerOne.PlayerMoney < playerOne.PlayerBet * 2)
@@ -343,7 +341,8 @@ namespace BlackjackGame
             playerOne.TakesInsurance();
             if (dealer.CurrentHand[1].Value == 10)
             {
-                //Text about that here
+                dealer.CurrentHand[1].flipCard();
+                UpdateCardImages();
                 playerOne.WonInsurance();
                 ResetTable();
             }
@@ -360,6 +359,20 @@ namespace BlackjackGame
         {
             btnInsurance.Enabled = false;
             btnInsurance.Visible = false;
+        }
+        /// <summary>
+        /// Disables Hit,Stand,Double,Split buttons, Changes their colour to green. 
+        /// </summary>
+        private void DisablePlayButtons() //Do this last
+        {
+            HitButton.Enabled = false;
+            HitButton.BackColor = Color.LimeGreen;
+            StandButton.Enabled = false;
+            StandButton.BackColor = Color.LimeGreen;
+            DoubleButton.Enabled = false;
+            DoubleButton.BackColor = Color.LimeGreen;
+            SplitButton.Enabled = false;
+            SplitButton.BackColor = Color.LimeGreen;
         }
     }
 }
