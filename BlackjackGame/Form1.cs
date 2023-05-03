@@ -424,6 +424,7 @@ namespace BlackjackGame
                 dealer.CurrentHand[1].flipCard();
                 UpdateCardImages();
                 playerOne.WonInsurance();
+                lblWinCondition.Text = "Insurance Win";
                 ResetTable();
             }
             else
