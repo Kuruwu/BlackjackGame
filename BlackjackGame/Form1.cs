@@ -15,7 +15,6 @@ namespace BlackjackGame
         System.Windows.Forms.Timer insuranceTimer = new System.Windows.Forms.Timer();
         int rebet = 0;
         int tempMoney;
-        bool playerwon = false;
 
         public Form1()
         {
