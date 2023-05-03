@@ -40,7 +40,12 @@ namespace BlackjackGame
         /// <param name="e"></param>
         private void DealerCardTimer(object? sender, EventArgs e) //Everytime a tick event happens this method is called.
         {
-            if (dealer.CalculateHandValue() < 17) //Dealer must hit up to 17 and stand.
+            if (dealer.CurrentHand.Count == 5) //If dealer has 5 cards they must stand. 
+            {
+                dealerTimer.Stop();
+                CheckWinCondition();
+            }
+            else if (dealer.CalculateHandValue() < 17) //Dealer must hit up to 17 and stand.
             {
                 dealer.AddCardToHand(deck.DrawCard());
                 if (dealer.CalculateHandValue() > 21) //Dealer has bust
@@ -118,8 +123,8 @@ namespace BlackjackGame
         private void Form1_Load(object sender, EventArgs e)
         {
             DisablePlayButtons();
-            //deck.ShuffleDeck();
-            deck.ShuffleDeckTestDeck();
+            deck.ShuffleDeck();
+            //deck.ShuffleDeckTestDeck();
             playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
         }
 
