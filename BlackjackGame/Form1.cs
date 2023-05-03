@@ -322,7 +322,7 @@ namespace BlackjackGame
             {
                 lblWinCondition.Text = "Draw";
                 lblWinCondition.Visible = true;
-                //Insert draw method here
+                playerOne.PlayerDrawsHand();
                 ResetTable();
             }
             else if (playersHand > dealersHand) //Player has higher hand than dealer
