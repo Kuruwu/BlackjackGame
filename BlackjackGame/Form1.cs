@@ -15,7 +15,7 @@ namespace BlackjackGame
         System.Windows.Forms.Timer insuranceTimer = new System.Windows.Forms.Timer();
         int rebet = 0;
         int tempMoney;
-
+        bool playerwon = false;
 
         public Form1()
         {
@@ -379,9 +379,9 @@ namespace BlackjackGame
             else
             {
                 openingHandTimer.Stop();
-                OpeningHandCheck();
                 EnableHitButton();
                 EnableStandButton();
+                OpeningHandCheck();
 
             }
         }
@@ -436,6 +436,7 @@ namespace BlackjackGame
                 UpdateCardImages();
                 playerOne.WonInsurance();
                 lblWinCondition.Text = "Insurance Win";
+                lblWinCondition.Visible = true;
                 ResetTable();
             }
             else
