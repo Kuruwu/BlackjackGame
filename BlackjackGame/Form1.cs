@@ -20,7 +20,7 @@ namespace BlackjackGame
         {
             InitializeComponent(); ;
             playerOne.CardHasAddedToHand += CardHasBeenModified; //Subscribing to events.
-            dealer.CardHasAddedToHand += CardHasBeenModified; 
+            dealer.CardHasAddedToHand += CardHasBeenModified;
             HitButton.Visible = true;
             dealerTimer.Interval = 1000; //1 seconds.
             dealerTimer.Tick += new EventHandler(DealerCardTimer); //Every interval (Tick) this event is fired.
@@ -464,7 +464,7 @@ namespace BlackjackGame
         /// <summary>
         /// Disables Hit,Stand,Double,Split buttons, Changes their colour to green. 
         /// </summary>
-        private void DisablePlayButtons() 
+        private void DisablePlayButtons()
         {
             DisableHitButton();
             DisableStandButton();

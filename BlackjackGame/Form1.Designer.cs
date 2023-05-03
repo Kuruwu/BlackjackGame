@@ -260,6 +260,7 @@
             BetTitle.ForeColor = SystemColors.Window;
             BetTitle.Location = new Point(608, 5);
             BetTitle.Name = "BetTitle";
+            BetTitle.ReadOnly = true;
             BetTitle.Size = new Size(159, 24);
             BetTitle.TabIndex = 6;
             BetTitle.Text = "Current Bet";
