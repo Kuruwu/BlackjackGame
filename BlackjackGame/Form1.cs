@@ -13,7 +13,8 @@ namespace BlackjackGame
         System.Windows.Forms.Timer tableTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer openingHandTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer insuranceTimer = new System.Windows.Forms.Timer();
-        int rebet = 0; 
+        int rebet = 0;
+        int tempMoney;
 
 
         public Form1()
@@ -123,6 +124,8 @@ namespace BlackjackGame
                 playerOne.PlayerWinsHand();
                 lblWinCondition.Text = "You Win";
                 lblWinCondition.Visible = true;
+                DisableHitButton();
+                DisableStandButton();
                 ResetTable();
             }
             else if (playerOneHandTotal == 21) //If player has 21 then auto stand.
@@ -207,11 +210,27 @@ namespace BlackjackGame
                     EnableBetButton(); //Enabling bet button if bet. 
                 }
             }
+            else if (playerOne.PlayerMoney < 10) //If the player has less than 10 money just bet whatever they have. 
+            {
+                tempMoney = playerOne.PlayerMoney;
+                playerOne.PlayerBet += playerOne.PlayerMoney;
+                playerOne.PlayerMoney = 0;
+                UpdateMoneyDisplay();
+                EnableBetButton();
+            }
         }
 
         private void reduceBet_Click(object sender, EventArgs e)
         {
-            if (playerOne.PlayerBet == 0)
+            if (tempMoney > 0) //If the player has betted less than 10 money replace with what we stored in increase bet function. 
+            {
+                playerOne.PlayerBet -= tempMoney;
+                playerOne.PlayerMoney += tempMoney;
+                UpdateMoneyDisplay();
+                tempMoney = 0;
+
+            }
+            else if (playerOne.PlayerBet == 0)
             {
                 return;
             }
@@ -256,7 +275,7 @@ namespace BlackjackGame
         private void btnBet_Click(object sender, EventArgs e)
         {
             DisableBetButton();
-            DisableBetAmountControls(); ;
+            DisableBetAmountControls();
             openingHandTimer.Start();
         }
         /// <summary>
@@ -264,11 +283,11 @@ namespace BlackjackGame
         /// </summary>
         private void ResetTable()
         {
-            //Check player money here if 0 then game over and ask to replace with 500?
             tableTimer.Start();
             playerOne.CurrentHand.Clear();
             dealer.CurrentHand.Clear();
             btnBet.Enabled = false;
+            tempMoney = 0;
             DisableInsuranceButton();
             DisablePlayButtons();
             deck.ResetDeck();
