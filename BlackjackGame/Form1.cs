@@ -21,7 +21,7 @@ namespace BlackjackGame
         {
             InitializeComponent(); ;
             playerOne.CardHasAddedToHand += CardHasBeenModified; //Subscribing to events.
-            dealer.CardHasAddedToHand += CardHasBeenModified; //Event could be static to Player class but causes memory leaks apparently. 
+            dealer.CardHasAddedToHand += CardHasBeenModified; 
             HitButton.Visible = true;
             dealerTimer.Interval = 1000; //1 seconds.
             dealerTimer.Tick += new EventHandler(DealerCardTimer); //Every interval (Tick) this event is fired.
@@ -34,11 +34,11 @@ namespace BlackjackGame
             insuranceTimer.Tick += new EventHandler(InsuranceDisplayTimer);
         }
         /// <summary>
-        /// Event handler for dealer drawing cards with intervals between them.
+        /// Event handler for dealer drawing cards with a time interval between them.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DealerCardTimer(object? sender, EventArgs e) //The method that is called to handle the tick event.
+        private void DealerCardTimer(object? sender, EventArgs e) //Everytime a tick event happens this method is called.
         {
             if (dealer.CalculateHandValue() < 17) //Dealer must hit up to 17 and stand.
             {
@@ -94,12 +94,22 @@ namespace BlackjackGame
                 UpdateMoneyDisplay();
             }
         }
+        /// <summary>
+        /// Tick event that makes the insurance label disappear after a few seconds. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InsuranceDisplayTimer(object? sender, EventArgs e)
         {
             lblInsurance.Visible = false;
             insuranceTimer.Stop();
 
         }
+        /// <summary>
+        /// The event to automatically update cards on drawing a new card. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CardHasBeenModified(object? sender, EventArgs e)
         {
             UpdateCardImages();
@@ -247,7 +257,8 @@ namespace BlackjackGame
             }
         }
         /// <summary>
-        /// Updates the card images from the resource file based on naming format for dealer and player. 
+        /// Updates the card images from the resource file based on naming format for dealer and player.
+        /// This is automatic when cards are drawn from the deck but needs to be manually invoked elsewhere.
         /// </summary>
         private void UpdateCardImages()
         {
@@ -432,6 +443,7 @@ namespace BlackjackGame
                 lblInsurance.Visible = true;
                 insuranceTimer.Start();
                 playerOne.LostInsurance();
+                DisableInsuranceButton();
                 UpdateMoneyDisplay();
             }
         }
@@ -446,7 +458,7 @@ namespace BlackjackGame
         /// <summary>
         /// Disables Hit,Stand,Double,Split buttons, Changes their colour to green. 
         /// </summary>
-        private void DisablePlayButtons() //Do this last
+        private void DisablePlayButtons() 
         {
             DisableHitButton();
             DisableStandButton();
