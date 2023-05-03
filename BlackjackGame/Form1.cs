@@ -13,7 +13,7 @@ namespace BlackjackGame
         System.Windows.Forms.Timer tableTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer openingHandTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer insuranceTimer = new System.Windows.Forms.Timer();
-        int rebet = 0; //Could implement rebet easily. 
+        int rebet = 0; 
 
 
         public Form1()
@@ -86,6 +86,12 @@ namespace BlackjackGame
             UpdateMoneyDisplay();
             UpdateCardImages();
             tableTimer.Stop();
+            if (playerOne.PlayerMoney == 0)
+            {
+                MessageBox.Show("Bankrupt! Money has been reset.");
+                playerOne.PlayerMoney = 500;
+                UpdateMoneyDisplay();
+            }
         }
         private void InsuranceDisplayTimer(object? sender, EventArgs e)
         {
