@@ -31,8 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             blackjackTab = new TabControl();
             gameTab = new TabPage();
-            btnInsurance = new Button();
             lblWinCondition = new Label();
+            lblInsurance = new Label();
+            btnInsurance = new Button();
             lblDealerTotal = new Label();
             btnBet = new Button();
             lblPlayerTotal = new Label();
@@ -42,7 +43,6 @@
             RulesButton = new Button();
             BetAmount = new Label();
             BetTitle = new TextBox();
-            SplitButton = new Button();
             DoubleButton = new Button();
             StandButton = new Button();
             HitButton = new Button();
@@ -61,6 +61,7 @@
             pctDealerCard1 = new PictureBox();
             pctDealerCard2 = new PictureBox();
             pctDealerCard3 = new PictureBox();
+            SplitButton = new Button();
             rulesTab = new TabPage();
             label1 = new Label();
             rulesLabel = new Label();
@@ -96,8 +97,9 @@
             // gameTab
             // 
             gameTab.BackColor = Color.ForestGreen;
-            gameTab.Controls.Add(btnInsurance);
             gameTab.Controls.Add(lblWinCondition);
+            gameTab.Controls.Add(lblInsurance);
+            gameTab.Controls.Add(btnInsurance);
             gameTab.Controls.Add(lblDealerTotal);
             gameTab.Controls.Add(btnBet);
             gameTab.Controls.Add(lblPlayerTotal);
@@ -107,13 +109,13 @@
             gameTab.Controls.Add(RulesButton);
             gameTab.Controls.Add(BetAmount);
             gameTab.Controls.Add(BetTitle);
-            gameTab.Controls.Add(SplitButton);
             gameTab.Controls.Add(DoubleButton);
             gameTab.Controls.Add(StandButton);
             gameTab.Controls.Add(HitButton);
             gameTab.Controls.Add(BlackjackTitle);
             gameTab.Controls.Add(panelPlayerCards);
             gameTab.Controls.Add(panelDealersCards);
+            gameTab.Controls.Add(SplitButton);
             gameTab.ForeColor = SystemColors.ActiveCaptionText;
             gameTab.Location = new Point(4, 27);
             gameTab.Margin = new Padding(2);
@@ -123,31 +125,42 @@
             gameTab.TabIndex = 0;
             gameTab.Text = "Game";
             // 
-            // btnInsurance
-            // 
-            btnInsurance.BackColor = Color.DeepSkyBlue;
-            btnInsurance.Enabled = false;
-            btnInsurance.ForeColor = SystemColors.ActiveCaptionText;
-            btnInsurance.Location = new Point(278, 184);
-            btnInsurance.Name = "btnInsurance";
-            btnInsurance.Size = new Size(159, 45);
-            btnInsurance.TabIndex = 29;
-            btnInsurance.Text = "Insurance";
-            btnInsurance.UseVisualStyleBackColor = false;
-            btnInsurance.Visible = false;
-            btnInsurance.Click += btnInsurance_Click;
-            // 
             // lblWinCondition
             // 
             lblWinCondition.AutoSize = true;
             lblWinCondition.BackColor = Color.Transparent;
             lblWinCondition.Font = new Font("Segoe UI", 72F, FontStyle.Regular, GraphicsUnit.Point);
-            lblWinCondition.Location = new Point(132, 155);
+            lblWinCondition.Location = new Point(135, 155);
             lblWinCondition.Name = "lblWinCondition";
             lblWinCondition.Size = new Size(455, 128);
             lblWinCondition.TabIndex = 22;
             lblWinCondition.Text = "YOU WIN";
+            lblWinCondition.TextAlign = ContentAlignment.MiddleCenter;
             lblWinCondition.Visible = false;
+            // 
+            // lblInsurance
+            // 
+            lblInsurance.AutoSize = true;
+            lblInsurance.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            lblInsurance.Location = new Point(219, 201);
+            lblInsurance.Name = "lblInsurance";
+            lblInsurance.Size = new Size(280, 28);
+            lblInsurance.TabIndex = 30;
+            lblInsurance.Text = "Dealer does not have Blackjack";
+            lblInsurance.Visible = false;
+            // 
+            // btnInsurance
+            // 
+            btnInsurance.BackColor = Color.LimeGreen;
+            btnInsurance.Enabled = false;
+            btnInsurance.ForeColor = SystemColors.ActiveCaptionText;
+            btnInsurance.Location = new Point(608, 340);
+            btnInsurance.Name = "btnInsurance";
+            btnInsurance.Size = new Size(159, 45);
+            btnInsurance.TabIndex = 29;
+            btnInsurance.Text = "Insurance";
+            btnInsurance.UseVisualStyleBackColor = false;
+            btnInsurance.Click += btnInsurance_Click;
             // 
             // lblDealerTotal
             // 
@@ -251,19 +264,6 @@
             BetTitle.TabIndex = 6;
             BetTitle.Text = "Current Bet";
             // 
-            // SplitButton
-            // 
-            SplitButton.BackColor = Color.LimeGreen;
-            SplitButton.Enabled = false;
-            SplitButton.ForeColor = SystemColors.ActiveCaptionText;
-            SplitButton.Location = new Point(609, 344);
-            SplitButton.Name = "SplitButton";
-            SplitButton.Size = new Size(159, 45);
-            SplitButton.TabIndex = 5;
-            SplitButton.Text = "Split";
-            SplitButton.UseVisualStyleBackColor = false;
-            SplitButton.Click += SplitButton_Click;
-            // 
             // DoubleButton
             // 
             DoubleButton.BackColor = Color.LimeGreen;
@@ -335,7 +335,7 @@
             // 
             lblPlayerMoneyTitle.AutoSize = true;
             lblPlayerMoneyTitle.ForeColor = SystemColors.ButtonHighlight;
-            lblPlayerMoneyTitle.Location = new Point(103, 143);
+            lblPlayerMoneyTitle.Location = new Point(106, 143);
             lblPlayerMoneyTitle.Name = "lblPlayerMoneyTitle";
             lblPlayerMoneyTitle.Size = new Size(82, 15);
             lblPlayerMoneyTitle.TabIndex = 22;
@@ -345,7 +345,7 @@
             // 
             playerMoneyLabel.AutoSize = true;
             playerMoneyLabel.ForeColor = SystemColors.ButtonHighlight;
-            playerMoneyLabel.Location = new Point(191, 143);
+            playerMoneyLabel.Location = new Point(194, 143);
             playerMoneyLabel.Name = "playerMoneyLabel";
             playerMoneyLabel.Size = new Size(154, 15);
             playerMoneyLabel.TabIndex = 30;
@@ -452,6 +452,20 @@
             pctDealerCard3.SizeMode = PictureBoxSizeMode.Zoom;
             pctDealerCard3.TabIndex = 19;
             pctDealerCard3.TabStop = false;
+            // 
+            // SplitButton
+            // 
+            SplitButton.BackColor = Color.LimeGreen;
+            SplitButton.Enabled = false;
+            SplitButton.ForeColor = SystemColors.ActiveCaptionText;
+            SplitButton.Location = new Point(263, 197);
+            SplitButton.Name = "SplitButton";
+            SplitButton.Size = new Size(159, 45);
+            SplitButton.TabIndex = 5;
+            SplitButton.Text = "Split";
+            SplitButton.UseVisualStyleBackColor = false;
+            SplitButton.Visible = false;
+            SplitButton.Click += SplitButton_Click;
             // 
             // rulesTab
             // 
@@ -561,5 +575,6 @@
         private Button btnInsurance;
         private Label playerMoneyLabel;
         private Label lblPlayerMoneyTitle;
+        private Label lblInsurance;
     }
 }

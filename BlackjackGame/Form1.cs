@@ -12,7 +12,8 @@ namespace BlackjackGame
         System.Windows.Forms.Timer dealerTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer tableTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer openingHandTimer = new System.Windows.Forms.Timer();
-        int rebet = 0;
+        System.Windows.Forms.Timer insuranceTimer = new System.Windows.Forms.Timer();
+        int rebet = 0; //Could implement rebet easily. 
 
 
         public Form1()
@@ -21,13 +22,15 @@ namespace BlackjackGame
             playerOne.CardHasAddedToHand += CardHasBeenModified; //Subscribing to events.
             dealer.CardHasAddedToHand += CardHasBeenModified; //Event could be static to Player class but causes memory leaks apparently. 
             HitButton.Visible = true;
-            dealerTimer.Interval = 1000; //2 seconds.
+            dealerTimer.Interval = 1000; //1 seconds.
             dealerTimer.Tick += new EventHandler(DealerCardTimer); //Every interval (Tick) this event is fired.
-            tableTimer.Interval = 2000; //3 seconds
+            tableTimer.Interval = 2000; //2 seconds
             tableTimer.Tick += new EventHandler(ClearTableTimer);
             lblWinCondition.Visible = false;
             openingHandTimer.Interval = 500; //0.5 seconds
             openingHandTimer.Tick += new EventHandler(OpeningHand);
+            insuranceTimer.Interval = 3000; // 3 Seconds
+            insuranceTimer.Tick += new EventHandler(InsuranceDisplayTimer);
         }
         /// <summary>
         /// Event handler for dealer drawing cards with intervals between them.
@@ -84,7 +87,12 @@ namespace BlackjackGame
             UpdateCardImages();
             tableTimer.Stop();
         }
+        private void InsuranceDisplayTimer(object? sender, EventArgs e)
+        {
+            lblInsurance.Visible = false;
+            insuranceTimer.Stop();
 
+        }
         private void CardHasBeenModified(object? sender, EventArgs e)
         {
             UpdateCardImages();
@@ -99,7 +107,7 @@ namespace BlackjackGame
 
         private void HitButton_Click(object sender, EventArgs e)
         {
-            HideInsuranceButton();
+            DisableInsuranceButton();
             DisableDoubleButton();
             playerOne.AddCardToHand(deck.DrawCard());
             int playerOneHandTotal = playerOne.CalculateHandValue();
@@ -131,7 +139,7 @@ namespace BlackjackGame
 
         private void StandButton_Click(object sender, EventArgs e)
         {
-            HideInsuranceButton();
+            DisableInsuranceButton();
             DisableDoubleButton();
             DisableHitButton();
             DisableStandButton();
@@ -146,9 +154,10 @@ namespace BlackjackGame
 
         private void DoubleButton_Click(object sender, EventArgs e)
         {
-            HideInsuranceButton();
+            DisableInsuranceButton();
             playerOne.PlayerBetsDouble();
             playerOne.AddCardToHand(deck.DrawCard());
+
             UpdateMoneyDisplay();
             DisableHitButton();
             int playerOneHandTotal = playerOne.CalculateHandValue();
@@ -241,7 +250,7 @@ namespace BlackjackGame
         private void btnBet_Click(object sender, EventArgs e)
         {
             DisableBetButton();
-            DisableBetAmountControls();;
+            DisableBetAmountControls(); ;
             openingHandTimer.Start();
         }
         /// <summary>
@@ -254,7 +263,7 @@ namespace BlackjackGame
             playerOne.CurrentHand.Clear();
             dealer.CurrentHand.Clear();
             btnBet.Enabled = false;
-            HideInsuranceButton();
+            DisableInsuranceButton();
             DisablePlayButtons();
             deck.ResetDeck();
             deck.ShuffleDeck();
@@ -375,8 +384,8 @@ namespace BlackjackGame
         {
             if (dealer.CurrentHand[0].Value == 11)
             {
-                btnInsurance.Visible = true;
                 btnInsurance.Enabled = true;
+                btnInsurance.BackColor = Color.Orange;
             }
         }
 
@@ -394,18 +403,19 @@ namespace BlackjackGame
             }
             else
             {
-                MessageBox.Show("Dealer Does not have Blackjack");
+                lblInsurance.Visible = true;
+                insuranceTimer.Start();
                 playerOne.LostInsurance();
                 UpdateMoneyDisplay();
             }
         }
         /// <summary>
-        /// Hides and disables Insurance Button
+        /// Disables the Insurance Button
         /// </summary>
-        private void HideInsuranceButton()
+        private void DisableInsuranceButton()
         {
             btnInsurance.Enabled = false;
-            btnInsurance.Visible = false;
+            btnInsurance.BackColor = Color.LimeGreen;
         }
         /// <summary>
         /// Disables Hit,Stand,Double,Split buttons, Changes their colour to green. 
