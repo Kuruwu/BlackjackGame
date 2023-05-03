@@ -118,7 +118,8 @@ namespace BlackjackGame
         private void Form1_Load(object sender, EventArgs e)
         {
             DisablePlayButtons();
-            deck.ShuffleDeck();
+            //deck.ShuffleDeck();
+            deck.ShuffleDeckTestDeck();
             playerMoneyLabel.Text = playerOne.PlayerMoney.ToString();
         }
 

@@ -108,9 +108,10 @@ namespace BlackjackGame
                         if (currentHand[i].Value == 11)
                         {
                             currentHand[i].Value = 1;
+                            sum -= 10; //Remove 10 off the sum variable as this is not checked again. 
                             break; //Changing only the First 11 Value Ace found to 1 if hand exceeds 21. 
                         }
-                        else
+                        else 
                         {
                             noMoreAces = true;
                         }

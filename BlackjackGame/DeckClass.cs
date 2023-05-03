@@ -38,7 +38,7 @@ namespace BlackjackGame
         public void ShuffleDeck()
         {
             Random random = new Random();
-            for (int i = 52 - 1; i > 0; i--)
+            for (int i = 51; i > 0; i--)
             {
                 int j = random.Next(0, i + 1);
                 Card temp = listOfCards[i];
@@ -46,6 +46,18 @@ namespace BlackjackGame
                 listOfCards[j] = temp;
             }
         } 
+        /// <summary>
+        /// A class that makes a custom deck for debugging. 
+        /// </summary>
+        public void ShuffleDeckTestDeck()
+        {
+            listOfCards[0] = listOfCards[8];
+            listOfCards[1] = listOfCards[4];
+            listOfCards[2] = listOfCards[10];
+            listOfCards[3] = listOfCards[6];
+            listOfCards[4] = listOfCards[14];
+            listOfCards[5] = listOfCards[13];
+        }
 
         /// <summary>
         /// Draws a card from the top of the deck and removes it.
