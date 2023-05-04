@@ -20,7 +20,9 @@ namespace BlackjackGame
         {
             get { return listOfCards; }
         }
-        
+        /// <summary>
+        /// Creates a Standard 52 Card Deck. 
+        /// </summary>
         private void createDeck()
         {
             foreach (string suits in Card.validSuits())

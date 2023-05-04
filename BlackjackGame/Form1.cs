@@ -355,13 +355,14 @@ namespace BlackjackGame
             //Dealing opening hands in alternate order.
             if (playerOne.CurrentHand.Count < 2)
             {
+                
                 if (playerOne.CurrentHand.Count == 1 && dealer.CurrentHand.Count == 0)
-                {
+                {   //First card
                     dealer.AddCardToHand(deck.DrawCard());
                     lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
                 }
                 else
-                {
+                {   //Second card
                     playerOne.AddCardToHand(deck.DrawCard());
                     lblPlayerTotal.Text = playerOne.CalculateHandValue().ToString();
                 }
@@ -369,20 +370,20 @@ namespace BlackjackGame
             else if (dealer.CurrentHand.Count < 2)
             {
                 if (dealer.CurrentHand.Count == 1)
-                {
+                {   //Second Card Needs to Be Drawn Face Down
                     dealer.AddCardToHand(deck.DrawCard());
                     dealer.CurrentHand[1].flipCard(); //Flip dealers hidden card. 
                     UpdateCardImages();
                     lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
                 }
-                else
+                else //First Card
                 {
                     dealer.AddCardToHand(deck.DrawCard());
                     lblDealerTotal.Text = dealer.CalculateHandValue().ToString();
                 }
             }
             else
-            {
+            {   //Stop the opening hand event
                 openingHandTimer.Stop();
                 EnableHitButton();
                 EnableStandButton();

@@ -35,12 +35,6 @@ namespace BlackjackGame
         }
         public List<Card> CurrentHand { get { return currentHand; } }
 
-        public void Bet(int amount)
-        {
-            //Might not need to exist.
-            //playerBet = amount;
-            //playerMoney = playerMoney - amount;
-        }
         public void AddCardToHand(Card card)
         {
             currentHand.Add(card);
@@ -51,6 +45,9 @@ namespace BlackjackGame
             sideBet = (playerBet / 2);
             playerMoney -= sideBet; 
         }
+        /// <summary>
+        /// Insurance pays 2:1
+        /// </summary>
         public void WonInsurance()
         {
             sideBet *= 3;
@@ -61,6 +58,10 @@ namespace BlackjackGame
         {
             sideBet = 0;
         }
+        /// <summary>
+        /// Check if player has 5 cards with a total value under 21 
+        /// </summary>
+        /// <returns>True if they have do else false</returns>
         public bool FiveCardTrick()
         {
             if (currentHand.Count == 5 && CalculateHandValue() <= 21)
@@ -69,6 +70,9 @@ namespace BlackjackGame
             }
             return false;
         }
+        /// <summary>
+        /// Standard payout 1:1
+        /// </summary>
         public void PlayerWinsHand()
         {
             playerMoney += playerBet * 2;
@@ -78,15 +82,25 @@ namespace BlackjackGame
         {
             playerBet = 0;
         }
+        /// <summary>
+        /// Bet is returned
+        /// </summary>
         public void PlayerDrawsHand()
         {
             playerMoney += playerBet;
         }
+        /// <summary>
+        /// Player doubles their bet.
+        /// </summary>
         public void PlayerBetsDouble()
         {
             playerMoney -= playerBet;
             playerBet = playerBet * 2;
         }
+        /// <summary>
+        /// Calculates the total sum of all cards in hand, if Aces are present and over 21 reduce their value.
+        /// </summary>
+        /// <returns>Integer sum of hand</returns>
         public int CalculateHandValue()
         {
             int sum = 0;
