@@ -383,7 +383,7 @@ namespace BlackjackGame
                 }
             }
             else
-            {   //Stop the opening hand event
+            {   //Stop the opening hand event once two cards have been drawn.
                 openingHandTimer.Stop();
                 EnableHitButton();
                 EnableStandButton();
@@ -433,11 +433,13 @@ namespace BlackjackGame
 
         private void btnInsurance_Click(object sender, EventArgs e)
         {
+            //Check if dealers hidden card is 10
             btnInsurance.Enabled = false;
             playerOne.TakesInsurance();
             UpdateMoneyDisplay();
             if (dealer.CurrentHand[1].Value == 10)
             {
+                //If dealer has blackjack payout and restart
                 dealer.CurrentHand[1].flipCard();
                 UpdateCardImages();
                 playerOne.WonInsurance();
@@ -446,7 +448,7 @@ namespace BlackjackGame
                 ResetTable();
             }
             else
-            {
+            {   //Continue
                 lblInsurance.Visible = true;
                 insuranceTimer.Start();
                 playerOne.LostInsurance();

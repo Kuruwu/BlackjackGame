@@ -38,7 +38,7 @@ namespace BlackjackGame
         public void AddCardToHand(Card card)
         {
             currentHand.Add(card);
-            CardHasAddedToHand?.Invoke(this, EventArgs.Empty);
+            CardHasAddedToHand?.Invoke(this, EventArgs.Empty); 
         }
         public void TakesInsurance()
         {
