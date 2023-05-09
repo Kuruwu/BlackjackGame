@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             blackjackTab = new TabControl();
             gameTab = new TabPage();
+            RulesTabCollection = new TabControl();
+            MainRulesTab = new TabPage();
+            BackToGame = new Button();
+            RulesTxt = new Label();
+            RulesLabel = new Label();
             lblWinCondition = new Label();
             lblInsurance = new Label();
             btnInsurance = new Button();
@@ -62,11 +67,10 @@
             pctDealerCard2 = new PictureBox();
             pctDealerCard3 = new PictureBox();
             SplitButton = new Button();
-            rulesTab = new TabPage();
-            label1 = new Label();
-            rulesLabel = new Label();
             blackjackTab.SuspendLayout();
             gameTab.SuspendLayout();
+            RulesTabCollection.SuspendLayout();
+            MainRulesTab.SuspendLayout();
             panelPlayerCards.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pctPlayerCard5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pctPlayerCard1).BeginInit();
@@ -79,14 +83,12 @@
             ((System.ComponentModel.ISupportInitialize)pctDealerCard1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pctDealerCard2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pctDealerCard3).BeginInit();
-            rulesTab.SuspendLayout();
             SuspendLayout();
             // 
             // blackjackTab
             // 
             blackjackTab.Appearance = TabAppearance.Buttons;
             blackjackTab.Controls.Add(gameTab);
-            blackjackTab.Controls.Add(rulesTab);
             blackjackTab.Location = new Point(0, -1);
             blackjackTab.Margin = new Padding(2);
             blackjackTab.Name = "blackjackTab";
@@ -97,6 +99,7 @@
             // gameTab
             // 
             gameTab.BackColor = Color.ForestGreen;
+            gameTab.Controls.Add(RulesTabCollection);
             gameTab.Controls.Add(lblWinCondition);
             gameTab.Controls.Add(lblInsurance);
             gameTab.Controls.Add(btnInsurance);
@@ -124,6 +127,63 @@
             gameTab.Size = new Size(791, 421);
             gameTab.TabIndex = 0;
             gameTab.Text = "Game";
+            // 
+            // RulesTabCollection
+            // 
+            RulesTabCollection.Controls.Add(MainRulesTab);
+            RulesTabCollection.Location = new Point(0, -27);
+            RulesTabCollection.Name = "RulesTabCollection";
+            RulesTabCollection.SelectedIndex = 0;
+            RulesTabCollection.Size = new Size(791, 448);
+            RulesTabCollection.TabIndex = 31;
+            RulesTabCollection.Visible = false;
+            // 
+            // MainRulesTab
+            // 
+            MainRulesTab.BackColor = Color.ForestGreen;
+            MainRulesTab.Controls.Add(BackToGame);
+            MainRulesTab.Controls.Add(RulesTxt);
+            MainRulesTab.Controls.Add(RulesLabel);
+            MainRulesTab.Location = new Point(4, 24);
+            MainRulesTab.Name = "MainRulesTab";
+            MainRulesTab.Padding = new Padding(3);
+            MainRulesTab.Size = new Size(783, 420);
+            MainRulesTab.TabIndex = 0;
+            MainRulesTab.Text = "Rules";
+            // 
+            // BackToGame
+            // 
+            BackToGame.Location = new Point(336, 327);
+            BackToGame.Name = "BackToGame";
+            BackToGame.Size = new Size(105, 23);
+            BackToGame.TabIndex = 3;
+            BackToGame.Text = "Return to game";
+            BackToGame.UseVisualStyleBackColor = true;
+            BackToGame.Click += BackToGame_Click;
+            // 
+            // RulesTxt
+            // 
+            RulesTxt.AutoSize = true;
+            RulesTxt.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            RulesTxt.ForeColor = SystemColors.ButtonHighlight;
+            RulesTxt.Location = new Point(21, 95);
+            RulesTxt.Margin = new Padding(2, 0, 2, 0);
+            RulesTxt.Name = "RulesTxt";
+            RulesTxt.Size = new Size(716, 150);
+            RulesTxt.TabIndex = 2;
+            RulesTxt.Text = resources.GetString("RulesTxt.Text");
+            // 
+            // RulesLabel
+            // 
+            RulesLabel.AutoSize = true;
+            RulesLabel.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            RulesLabel.ForeColor = SystemColors.ButtonHighlight;
+            RulesLabel.Location = new Point(336, 14);
+            RulesLabel.Margin = new Padding(2, 0, 2, 0);
+            RulesLabel.Name = "RulesLabel";
+            RulesLabel.Size = new Size(105, 31);
+            RulesLabel.TabIndex = 1;
+            RulesLabel.Text = "RULES";
             // 
             // lblWinCondition
             // 
@@ -241,6 +301,7 @@
             RulesButton.TabIndex = 8;
             RulesButton.Text = "Rules";
             RulesButton.UseVisualStyleBackColor = false;
+            RulesButton.Click += RulesButton_Click;
             // 
             // BetAmount
             // 
@@ -468,43 +529,6 @@
             SplitButton.Visible = false;
             SplitButton.Click += SplitButton_Click;
             // 
-            // rulesTab
-            // 
-            rulesTab.BackColor = Color.ForestGreen;
-            rulesTab.Controls.Add(label1);
-            rulesTab.Controls.Add(rulesLabel);
-            rulesTab.Location = new Point(4, 27);
-            rulesTab.Margin = new Padding(2);
-            rulesTab.Name = "rulesTab";
-            rulesTab.Padding = new Padding(2);
-            rulesTab.Size = new Size(791, 421);
-            rulesTab.TabIndex = 1;
-            rulesTab.Text = "Rules";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(10, 48);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(716, 150);
-            label1.TabIndex = 1;
-            label1.Text = resources.GetString("label1.Text");
-            // 
-            // rulesLabel
-            // 
-            rulesLabel.AutoSize = true;
-            rulesLabel.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            rulesLabel.ForeColor = SystemColors.ButtonHighlight;
-            rulesLabel.Location = new Point(342, 12);
-            rulesLabel.Margin = new Padding(2, 0, 2, 0);
-            rulesLabel.Name = "rulesLabel";
-            rulesLabel.Size = new Size(105, 31);
-            rulesLabel.TabIndex = 0;
-            rulesLabel.Text = "RULES";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -521,6 +545,9 @@
             blackjackTab.ResumeLayout(false);
             gameTab.ResumeLayout(false);
             gameTab.PerformLayout();
+            RulesTabCollection.ResumeLayout(false);
+            MainRulesTab.ResumeLayout(false);
+            MainRulesTab.PerformLayout();
             panelPlayerCards.ResumeLayout(false);
             panelPlayerCards.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pctPlayerCard5).EndInit();
@@ -534,8 +561,6 @@
             ((System.ComponentModel.ISupportInitialize)pctDealerCard1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pctDealerCard2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pctDealerCard3).EndInit();
-            rulesTab.ResumeLayout(false);
-            rulesTab.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -543,9 +568,6 @@
 
         private TabControl blackjackTab;
         private TabPage gameTab;
-        private TabPage rulesTab;
-        private Label rulesLabel;
-        private Label label1;
         private Label BlackjackTitle;
         private Button SplitButton;
         private Button DoubleButton;
@@ -577,5 +599,10 @@
         private Label playerMoneyLabel;
         private Label lblPlayerMoneyTitle;
         private Label lblInsurance;
+        private TabControl RulesTabCollection;
+        private TabPage MainRulesTab;
+        private Button BackToGame;
+        private Label RulesTxt;
+        private Label RulesLabel;
     }
 }

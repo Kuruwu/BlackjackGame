@@ -355,7 +355,7 @@ namespace BlackjackGame
             //Dealing opening hands in alternate order.
             if (playerOne.CurrentHand.Count < 2)
             {
-                
+
                 if (playerOne.CurrentHand.Count == 1 && dealer.CurrentHand.Count == 0)
                 {   //First card
                     dealer.AddCardToHand(deck.DrawCard());
@@ -527,5 +527,16 @@ namespace BlackjackGame
             reduceBet.Enabled = false;
         }
 
+        private void RulesButton_Click(object sender, EventArgs e)
+        {
+            RulesTabCollection.Visible = true;
+            BackToGame.Visible = true;
+        }
+
+        private void BackToGame_Click(object sender, EventArgs e)
+        {
+            RulesTabCollection.Visible = false;
+            BackToGame.Visible = false;
+        }
     }
 }
