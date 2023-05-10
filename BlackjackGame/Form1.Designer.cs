@@ -169,7 +169,7 @@
             RulesTxt.Location = new Point(21, 95);
             RulesTxt.Margin = new Padding(2, 0, 2, 0);
             RulesTxt.Name = "RulesTxt";
-            RulesTxt.Size = new Size(716, 150);
+            RulesTxt.Size = new Size(711, 120);
             RulesTxt.TabIndex = 2;
             RulesTxt.Text = resources.GetString("RulesTxt.Text");
             // 
